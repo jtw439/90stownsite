@@ -3,587 +3,1114 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>~*~ Welcome 2 90's TOWN ~*~</title>
+<title>90's TOWN</title>
+<meta name="description" content="90's TOWN — a serialized mystery-thriller. What if you could bring the past back to life?">
 <style>
   :root {
+    --silver: #c0c0c0;
+    --light: #ffffff;
+    --shade: #808080;
+    --dark: #000000;
+    --navy: #0a0630;
     --magenta: #ff2bd6;
     --cyan: #3ff3ff;
     --yellow: #fff200;
     --lime: #39ff14;
-    --navy: #0a0630;
-    --silver: #c0c0c0;
-    --s: 1;
+    --title-on: linear-gradient(90deg, #ff2bd6, #b967ff 55%, #01cdfe);
+    --title-off: linear-gradient(90deg, #808080, #a8a8a8);
+    --taskbar-h: 40px;
+    --ui: Tahoma, "Segoe UI", Geneva, Verdana, sans-serif;
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  html, body { height: 100%; margin: 0; overflow: hidden; }
   body {
-    margin: 0;
-    color: #fff;
-    font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE", "Comic Neue", cursive;
-    /* hand-rolled starfield tile */
-    background-color: var(--navy);
-    background-image:
-      radial-gradient(1.5px 1.5px at 20px 30px, #fff 50%, transparent 51%),
-      radial-gradient(1px 1px at 90px 120px, #fff 50%, transparent 51%),
-      radial-gradient(2px 2px at 150px 60px, var(--yellow) 50%, transparent 51%),
-      radial-gradient(1px 1px at 60px 170px, var(--cyan) 50%, transparent 51%),
-      radial-gradient(1.5px 1.5px at 180px 190px, #fff 50%, transparent 51%),
-      radial-gradient(1px 1px at 120px 20px, var(--magenta) 50%, transparent 51%);
-    background-size: 200px 200px;
-    padding-top: env(safe-area-inset-top, 0px);
-    padding-bottom: env(safe-area-inset-bottom, 0px);
-  }
-  a { color: var(--cyan); }
-  a:visited { color: var(--magenta); }
-
-  /* ---------- vaporwave layer ---------- */
-  .floor {
-    position: fixed;
-    left: -50%; right: -50%;
-    bottom: -22vh;
-    height: 44vh;
-    z-index: -1;
-    background-image:
-      linear-gradient(rgba(255,43,214,.16) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,43,214,.16) 1px, transparent 1px);
-    background-size: 70px 70px;
-    transform: perspective(300px) rotateX(62deg);
-    transform-origin: top;
-    animation: drive 7s linear infinite;
-    -webkit-mask: linear-gradient(transparent, #000 60%);
-            mask: linear-gradient(transparent, #000 60%);
-  }
-  @keyframes drive { to { background-position: 0 70px; } }
-  .title-wrap { position: relative; display: inline-block; isolation: isolate; }
-  .sun {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: clamp(130px, 22vw, 250px);
-    aspect-ratio: 1;
-    transform: translate(-50%, -50%);
-    z-index: -1;
-    border-radius: 50%;
-    background: linear-gradient(180deg, #ffe08a 5%, #ff8f6b 45%, #ff2bd6 85%);
-    -webkit-mask: linear-gradient(#000 0 48%, transparent 48% 53%, #000 53% 60%, transparent 60% 66%, #000 66% 72%, transparent 72% 79%, #000 79% 84%, transparent 84%);
-            mask: linear-gradient(#000 0 48%, transparent 48% 53%, #000 53% 60%, transparent 60% 66%, #000 66% 72%, transparent 72% 79%, #000 79% 84%, transparent 84%);
-    filter: drop-shadow(0 0 18px rgba(255,43,214,.45));
-    opacity: .8;
-  }
-  header > p, header > .construction { position: relative; z-index: 1; }
-  .tagline { text-shadow: 0 0 6px #0a0630, 0 0 12px #0a0630; }
-  .icons { margin-top: 12px; font-size: 22px; letter-spacing: 6px; }
-
-  /* ---------- top marquee ---------- */
-  .ticker {
+    font-family: var(--ui);
+    font-size: 13px;
+    color: #000;
     background: #000;
-    border-top: 3px ridge var(--silver);
-    border-bottom: 3px ridge var(--silver);
-    color: var(--lime);
-    font-family: "Courier New", Courier, monospace;
-    font-weight: bold;
-    font-size: 15px;
-    overflow: hidden;
-    white-space: nowrap;
-    padding: 6px 0;
+    -webkit-user-select: none;
+    user-select: none;
   }
-  .ticker span {
-    display: inline-block;
-    padding-left: 100%;
-    animation: ticker 28s linear infinite;
-  }
-  @keyframes ticker { to { transform: translateX(-100%); } }
+  button { font-family: var(--ui); }
 
-  /* ---------- header ---------- */
-  header { text-align: center; padding: 56px 12px 8px; }
+  /* bevels */
+  .raised { background: var(--silver); border: 2px solid; border-color: var(--light) var(--dark) var(--dark) var(--light); box-shadow: inset -1px -1px 0 var(--shade), inset 1px 1px 0 #dfdfdf; }
+  .sunken { border: 2px solid; border-color: var(--shade) var(--light) var(--light) var(--shade); box-shadow: inset 1px 1px 0 var(--dark); }
+  .btn95 {
+    font-size: 13px;
+    min-width: 76px;
+    padding: 4px 12px;
+    color: #000;
+    cursor: pointer;
+  }
+  .btn95:active, .btn95.down { border-color: var(--dark) var(--light) var(--light) var(--dark); box-shadow: inset 1px 1px 0 var(--shade); }
+  .btn95:focus-visible { outline: 1px dotted #000; outline-offset: -5px; }
+
+  /* ---------- boot ---------- */
+  #boot {
+    position: fixed; inset: 0; z-index: 1000;
+    background: #000;
+    color: #c8c8c8;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 15px;
+    padding: calc(env(safe-area-inset-top, 0px) + 24px) 28px;
+    cursor: pointer;
+  }
+  #boot pre { margin: 0; white-space: pre-wrap; line-height: 1.45; }
+  #boot .hint { position: absolute; bottom: calc(env(safe-area-inset-bottom, 0px) + 20px); left: 28px; color: #777; font-size: 13px; }
+  #splash {
+    position: absolute; inset: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 26px;
+    background: radial-gradient(ellipse at 50% 60%, #1d0b4a, #0a0630 70%);
+  }
+  #splash.on { display: flex; }
   .wordart {
     margin: 0;
-    font-family: Impact, "Arial Black", "Haettenschweiler", sans-serif;
-    font-size: clamp(56px, 13vw, 150px);
+    font-family: Impact, "Arial Black", Haettenschweiler, sans-serif;
+    font-size: clamp(54px, 11vw, 130px);
     line-height: .95;
     letter-spacing: 2px;
     background: linear-gradient(180deg, var(--yellow) 0%, #ff8a00 35%, var(--magenta) 65%, #7b2bff 100%);
     -webkit-background-clip: text;
-    background-clip: text;
+            background-clip: text;
     color: transparent;
     -webkit-text-stroke: 2px #fff;
     filter: drop-shadow(5px 5px 0 var(--cyan)) drop-shadow(5px 5px 0 #000);
-    transform: skewY(-4deg) perspective(400px) rotateX(8deg);
+    transform: skewY(-4deg);
     display: inline-block;
   }
-  .tagline {
-    font-family: "Times New Roman", Times, serif;
-    font-style: italic;
-    font-size: clamp(18px, 3vw, 26px);
-    color: var(--yellow);
-    margin: 22px 0 6px;
-  }
-  .blink { animation: blink 1s steps(1) infinite; }
-  @keyframes blink { 50% { visibility: hidden; } }
+  .splash-sub { font-family: var(--ui); color: #fff; font-size: 18px; letter-spacing: .3em; }
+  .splash-sub b { color: var(--cyan); }
+  .loadbar { width: min(320px, 70vw); height: 22px; padding: 2px; background: #000; border: 2px solid #777; }
+  .loadbar i { display: block; height: 100%; width: 0; background: repeating-linear-gradient(90deg, var(--magenta) 0 14px, transparent 14px 17px); transition: width .2s linear; }
 
-  .construction {
-    max-width: 640px;
-    margin: 18px auto 0;
-    padding: 8px 12px;
-    background: repeating-linear-gradient(-45deg, var(--yellow) 0 18px, #000 18px 36px);
-    border: 3px outset var(--silver);
+  /* ---------- desktop: vaporwave scene ---------- */
+  #desktop {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    bottom: calc(var(--taskbar-h) + env(safe-area-inset-bottom, 0px));
+    overflow: hidden;
+    background: #1d5fd6;
   }
-  .construction b {
-    display: block;
-    background: #000;
-    color: var(--yellow);
-    font-family: "Arial Black", Impact, sans-serif;
-    font-size: clamp(14px, 2.6vw, 20px);
-    padding: 6px;
-    letter-spacing: 1px;
+  .stars {
+    position: absolute; left: 0; right: 0; top: 0; height: 55%;
+    background-image:
+      radial-gradient(1.5px 1.5px at 20px 30px, #fff 50%, transparent 51%),
+      radial-gradient(1px 1px at 90px 120px, #fff 50%, transparent 51%),
+      radial-gradient(2px 2px at 150px 60px, #fffb96 50%, transparent 51%),
+      radial-gradient(1px 1px at 60px 170px, #01cdfe 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 180px 190px, #fff 50%, transparent 51%);
+    background-size: 200px 200px;
+    -webkit-mask: linear-gradient(#000 40%, transparent);
+            mask: linear-gradient(#000 40%, transparent);
+    pointer-events: none;
+  }
+  .vw-sun {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% - var(--horizon) - 2px);
+    width: min(46vmin, 420px);
+    aspect-ratio: 1;
+    transform: translate(-50%, 42%);
+    border-radius: 50%;
+    background: linear-gradient(180deg, #fffb96 0%, #ffc46b 30%, #ff6fa8 62%, #ff2bd6 100%);
+    -webkit-mask: linear-gradient(#000 0 44%, transparent 44% 47%, #000 47% 53%, transparent 53% 57%, #000 57% 62%, transparent 62% 67%, #000 67% 71%, transparent 71% 77%, #000 77%);
+            mask: linear-gradient(#000 0 44%, transparent 44% 47%, #000 47% 53%, transparent 53% 57%, #000 57% 62%, transparent 62% 67%, #000 67% 71%, transparent 71% 77%, #000 77%);
+    filter: drop-shadow(0 0 40px rgba(255,60,172,.8));
+    pointer-events: none;
+  }
+  .vw-mtn { position: absolute; left: 0; right: 0; bottom: calc(100% - var(--horizon)); height: 22%; width: 100%; pointer-events: none; }
+  .vw-ground {
+    position: absolute; left: 0; right: 0; top: var(--horizon); bottom: 0;
+    background: linear-gradient(180deg, #2a0845 0%, #12032a 60%, #07010f 100%);
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .vw-ground::before {
+    content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px;
+    background: #ff71ce; box-shadow: 0 0 18px 4px rgba(255,113,206,.9);
+  }
+  .vw-grid {
+    position: absolute; left: -60%; right: -60%; top: 0; height: 170%;
+    background-image:
+      linear-gradient(rgba(255,113,206,.75) 2px, transparent 2px),
+      linear-gradient(90deg, rgba(1,205,254,.6) 2px, transparent 2px);
+    background-size: 44px 44px;
+    transform: perspective(260px) rotateX(64deg);
+    transform-origin: top;
+    animation: drive 1.8s linear infinite;
+    -webkit-mask: linear-gradient(transparent 0%, #000 22%);
+            mask: linear-gradient(transparent 0%, #000 22%);
+  }
+  @keyframes drive { to { background-position: 0 44px; } }
+  .vw-palm { position: absolute; bottom: 0; height: 78%; pointer-events: none; }
+  .vw-palm.l { left: -2%; }
+  .vw-palm.r { right: -2%; transform: scaleX(-1); }
+  .scan {
+    position: absolute; inset: 0; pointer-events: none;
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,.07) 0 1px, transparent 1px 3px);
   }
 
-  hr.rainbow {
-    border: 0;
-    height: 6px;
-    margin: 26px auto;
-    width: min(92%, 900px);
+  /* icons */
+  #icons {
+    position: absolute;
+    top: calc(env(safe-area-inset-top, 0px) + 10px);
+    left: 8px;
+    bottom: 8px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(auto-fill, 92px);
+    grid-auto-columns: 92px;
+    gap: 4px;
+    z-index: 1;
+  }
+  .icon {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    width: 92px; height: 88px; padding: 6px 2px 0;
+    background: none; border: 0; cursor: pointer;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    line-height: 1.2;
+  }
+  .icon svg { width: 36px; height: 36px; flex: none; }
+  .icon span { padding: 1px 3px; text-shadow: 1px 1px 0 #000, 0 0 4px #000; overflow-wrap: anywhere; }
+  .icon.sel span { background: #000080; outline: 1px dotted #fff; text-shadow: none; }
+  .icon.sel svg { filter: drop-shadow(0 0 0 #000080) brightness(.75) sepia(1) hue-rotate(190deg) saturate(3); }
+  .icon:focus-visible { outline: none; }
+  .icon:focus-visible span { outline: 1px dotted #fff; }
+
+  /* windows */
+  .win {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    min-width: 240px;
+    padding: 3px;
+    z-index: 10;
+  }
+  .win.open { display: flex; }
+  .win.min { display: none; }
+  .win.max { left: 0 !important; top: 0 !important; width: 100% !important; height: 100% !important; }
+  .titlebar {
+    display: flex; align-items: center; gap: 6px;
+    height: 24px; padding: 0 3px 0 5px;
+    background: var(--title-off);
+    color: #d8d8d8;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: default;
+    touch-action: none;
+  }
+  .win.active .titlebar { background: var(--title-on); color: #fff; text-shadow: 1px 1px 0 #6b1f7a; }
+  .titlebar .t { flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .titlebar svg { width: 16px; height: 16px; flex: none; }
+  .tb-btn {
+    width: 20px; height: 18px; padding: 0;
+    display: grid; place-items: center;
+    font: bold 11px/1 var(--ui);
+    color: #000; text-shadow: none;
+    cursor: pointer;
+  }
+  .tb-btn + .tb-btn { margin-left: -4px; }
+  .tb-btn.x { margin-left: 2px; }
+  .menubar { display: flex; gap: 2px; padding: 2px 2px 3px; font-size: 13px; }
+  .menubar span { padding: 2px 7px; }
+  .menubar span u { text-decoration: underline; }
+  .body { flex: 1; min-height: 0; background: #fff; overflow: auto; }
+  .statusbar { display: flex; gap: 3px; padding-top: 3px; font-size: 12px; }
+  .statusbar > div { padding: 2px 6px; }
+  .statusbar > div:first-child { flex: 1; }
+
+  /* pilot window */
+  .toolbar { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; padding: 3px 2px 5px; }
+  .toolbar .btn95 { min-width: 0; padding: 3px 10px; }
+  .toolbar select { font: 13px var(--ui); padding: 2px; }
+  .toolbar .sep { width: 2px; align-self: stretch; border-left: 1px solid var(--shade); border-right: 1px solid var(--light); margin: 0 4px; }
+  #scroller { background: #fffef6; overscroll-behavior: contain; scroll-behavior: smooth; }
+  .slide { scroll-margin-top: 0; }
+  .frame { position: relative; width: 100%; aspect-ratio: 907 / 510; overflow: hidden; background: #fffef6; }
+  .frame iframe {
+    position: absolute; top: 0; left: 0;
+    width: 907px; height: 510px; border: 0;
+    transform: scale(var(--s, 1)); transform-origin: 0 0;
+    opacity: 0; transition: opacity .4s;
+  }
+  .frame iframe.ready { opacity: 1; }
+  .divider {
+    height: 8px;
     background: linear-gradient(90deg, red, orange, yellow, lime, cyan, blue, violet, red);
     background-size: 200% 100%;
     animation: slide 3s linear infinite;
-    box-shadow: 0 0 8px rgba(255,255,255,.6);
   }
   @keyframes slide { to { background-position: -200% 0; } }
 
-  /* ---------- layout "table" ---------- */
-  .layout {
-    display: grid;
-    grid-template-columns: 168px minmax(0, 1fr);
-    gap: 14px;
-    max-width: 1320px;
-    margin: 0 auto;
-    padding: 0 14px 20px;
-    align-items: start;
+  /* window-opening zoom outline */
+  .zoomrect {
+    position: fixed; z-index: 800; pointer-events: none;
+    border: 2px solid #fff; outline: 1px solid #000;
+    box-shadow: 0 0 0 1px rgba(255,255,255,.5) inset;
+    transition: left .38s cubic-bezier(.2,.7,.3,1), top .38s cubic-bezier(.2,.7,.3,1), width .38s cubic-bezier(.2,.7,.3,1), height .38s cubic-bezier(.2,.7,.3,1);
   }
-  aside {
-    position: sticky;
-    top: calc(env(safe-area-inset-top, 0px) + 12px);
-    background: #000080;
-    border: 4px ridge var(--silver);
-    padding: 10px 8px;
-    text-align: center;
-    font-size: 13px;
+  body.busy, body.busy * { cursor: progress !important; }
+
+  /* town reader (pdf viewer) */
+  .reader { background: #6e6e6e; overscroll-behavior: contain; }
+  .reader .pages { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 16px 10px 30px; }
+  .reader img {
+    display: block; width: 100%; max-width: var(--pw, 860px); height: auto;
+    aspect-ratio: 1000 / 1294;
+    background: #fff; box-shadow: 3px 3px 0 #000, 0 0 0 1px #000;
   }
-  aside h2 {
-    margin: 0 0 8px;
-    font-size: 15px;
-    color: var(--yellow);
-    text-shadow: 2px 2px 0 var(--magenta);
+  .toolbar a.btn95 { text-decoration: none; display: inline-flex; align-items: center; }
+  .lock {
+    width: 100%; max-width: var(--pw, 860px);
+    background: #fff; box-shadow: 3px 3px 0 #000, 0 0 0 1px #000;
+    padding: 28px 22px 30px; text-align: center; color: #111;
+    font-family: "Courier New", Courier, monospace;
+    position: relative; overflow: hidden;
   }
-  .jump {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 3px;
-    margin-bottom: 12px;
+  .lock .redact { display: block; height: 14px; margin: 9px auto; background: #111; }
+  .lock .stamp {
+    display: inline-block; margin: 18px 0 14px; padding: 6px 16px;
+    border: 4px double #c21d1d; color: #c21d1d;
+    font: 900 clamp(20px, 4vw, 34px)/1.1 "Arial Black", Impact, sans-serif; letter-spacing: 2px;
+    transform: rotate(-4deg);
   }
-  .btn {
-    font-family: "MS Sans Serif", Tahoma, Verdana, sans-serif;
-    font-size: 12px;
-    font-weight: bold;
-    color: #000;
+  .lock .spoiler {
+    display: inline-block; margin-bottom: 14px; padding: 5px 12px;
+    background: repeating-linear-gradient(-45deg, #fff200 0 12px, #111 12px 24px);
+  }
+  .lock .spoiler b { display: block; background: #111; color: #fff200; padding: 4px 10px; font: 900 14px "Arial Black", sans-serif; letter-spacing: 1px; }
+  .lock p { margin: 8px auto; max-width: 520px; font-size: 14px; line-height: 1.5; }
+  .lock form { margin-top: 18px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+  .lock input { font: 15px "Courier New", monospace; padding: 5px 8px; width: min(300px, 100%); border: 2px solid; border-color: var(--shade) var(--light) var(--light) var(--shade); }
+  .lock .err { min-height: 20px; margin-top: 10px; color: #c21d1d; font-weight: bold; }
+  .lock.shake { animation: shake .35s; }
+  @keyframes shake { 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+  .unlocked-banner { width: 100%; max-width: var(--pw, 860px); background: #111; color: #fff200; text-align: center; padding: 8px; font: bold 13px "Courier New", monospace; letter-spacing: 1px; }
+
+  /* notepad */
+  .notepad { font: 14px/1.5 "Courier New", Courier, monospace; padding: 8px 10px; white-space: pre-wrap; user-select: text; -webkit-user-select: text; }
+
+  /* recycle bin + my computer */
+  .files { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 10px; padding: 14px; }
+  .file { display: flex; flex-direction: column; align-items: center; gap: 5px; font-size: 12px; text-align: center; word-break: break-word; }
+  .file svg { width: 32px; height: 32px; }
+  .panel { padding: 16px; display: flex; gap: 18px; align-items: flex-start; background: var(--silver); }
+  .panel svg { width: 64px; height: 64px; flex: none; }
+  .panel dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 13px; }
+  .panel dt { font-weight: bold; }
+  .panel dd { margin: 0; }
+  .counter { display: inline-flex; gap: 2px; background: #000; padding: 2px; }
+  .counter i { font: bold 15px "Courier New", monospace; font-style: normal; color: var(--lime); background: #111; width: 12px; text-align: center; }
+  .foot { display: flex; justify-content: flex-end; gap: 6px; padding: 8px 4px 2px; background: var(--silver); }
+
+  /* townamp */
+  .amp { background: #1b1b2e; color: var(--lime); padding: 8px; display: flex; flex-direction: column; gap: 8px; }
+  .amp .lcd { background: #000; border: 2px inset #444; padding: 6px 8px; font: 13px "Courier New", monospace; overflow: hidden; white-space: nowrap; }
+  .amp .lcd span { display: inline-block; }
+  .amp.playing .lcd span { animation: marq 8s linear infinite; }
+  @keyframes marq { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
+  .viz { display: flex; align-items: flex-end; gap: 3px; height: 34px; background: #000; padding: 3px; border: 2px inset #444; }
+  .viz i { flex: 1; height: 8%; background: linear-gradient(to top, var(--lime), var(--yellow) 70%, #f33); transition: height .12s; }
+  .amp .ctrls { display: flex; gap: 4px; }
+  .amp .ctrls .btn95 { min-width: 0; flex: 1; padding: 3px 0; font-weight: bold; }
+
+  /* dialogs */
+  .dialog { width: min(400px, calc(100vw - 24px)); }
+  .dialog .dlg { background: var(--silver); padding: 16px 16px 6px; display: flex; gap: 14px; align-items: flex-start; }
+  .dialog .dlg svg { width: 34px; height: 34px; flex: none; }
+  .dialog .msg { font-size: 14px; line-height: 1.4; }
+  .dialog .msg big { display: block; font-family: Impact, "Arial Black", sans-serif; font-size: 26px; color: #e3281b; margin-bottom: 6px; letter-spacing: .5px; }
+  .dialog .foot { justify-content: center; padding: 10px 0 12px; }
+  #scrim { position: absolute; inset: 0; z-index: 900; display: none; }
+  #scrim.on { display: block; }
+
+  /* ---------- taskbar ---------- */
+  #taskbar {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    height: calc(var(--taskbar-h) + env(safe-area-inset-bottom, 0px));
+    padding: 4px 4px calc(4px + env(safe-area-inset-bottom, 0px));
+    display: flex; gap: 4px; align-items: stretch;
     background: var(--silver);
-    border: 2px outset #fff;
-    padding: 4px 0;
-    text-decoration: none;
-    cursor: pointer;
-    display: block;
+    border-top: 2px solid var(--light);
+    box-shadow: 0 -1px 0 #dfdfdf;
+    z-index: 950;
   }
-  .btn:visited { color: #000; }
-  .btn:active { border-style: inset; }
-  .btn.on { background: var(--yellow); }
-  .btn:focus-visible { outline: 2px dotted var(--magenta); outline-offset: 1px; }
-  .wide { width: 100%; font-size: 12px; padding: 6px 3px; margin-top: 6px; }
+  #start { display: flex; align-items: center; gap: 5px; min-width: 0; padding: 0 8px 0 5px; font-weight: bold; font-size: 14px; }
+  #start svg { width: 20px; height: 20px; }
+  #tasks { flex: 1; display: flex; gap: 4px; min-width: 0; overflow: hidden; }
+  .task {
+    flex: 0 1 180px; min-width: 40px;
+    display: flex; align-items: center; gap: 5px;
+    padding: 0 8px; text-align: left; font-size: 12px;
+    overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+  }
+  .task svg { width: 16px; height: 16px; flex: none; }
+  .task.down { font-weight: bold; background: repeating-conic-gradient(#c0c0c0 0 25%, #fff 0 50%) 0 0 / 2px 2px; }
+  #tray { display: flex; align-items: center; gap: 8px; padding: 0 10px; font-size: 12px; white-space: nowrap; }
+  #tray button { background: none; border: 0; padding: 0; cursor: pointer; display: grid; }
+  #tray svg { width: 16px; height: 16px; }
 
-  .counter {
-    display: inline-flex;
-    gap: 2px;
-    margin: 6px 0 2px;
-    padding: 3px;
-    background: #000;
-    border: 2px inset var(--silver);
-  }
-  .counter i {
-    font-style: normal;
-    font-family: "Courier New", monospace;
-    font-weight: bold;
-    font-size: 16px;
-    color: var(--lime);
-    background: #111;
-    width: 14px;
-    border-right: 1px solid #333;
-  }
-  .small { font-size: 12px; color: #ddd; line-height: 1.35; }
-  .badge {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 5px 8px;
-    font-family: Arial, sans-serif;
-    font-size: 11px;
-    font-weight: bold;
-    color: #fff;
-    background: linear-gradient(#1b3a8a, #000);
-    border: 2px outset #8fa7ff;
-    line-height: 1.2;
-  }
-  .badge b { color: var(--yellow); font-size: 13px; }
-
-  /* ---------- slides ---------- */
-  main { min-width: 0; }
-  .slide { margin: 0 0 30px; scroll-margin-top: 16px; }
-  .titlebar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: linear-gradient(90deg, #ff2bd6, #b967ff 55%, #01cdfe);
-    color: #fff;
-    text-shadow: 1px 1px 0 #6b1f7a;
-    font-family: Tahoma, Verdana, sans-serif;
-    font-size: 13px;
-    font-weight: bold;
-    padding: 3px 4px 3px 8px;
-    border: 3px outset var(--silver);
-    border-bottom: 0;
-  }
-  .titlebar .ctl { display: flex; gap: 2px; }
-  .titlebar .ctl span {
-    width: 18px; height: 16px;
-    background: var(--silver);
-    border: 2px outset #fff;
-    color: #000;
-    font-size: 10px;
-    line-height: 11px;
-    text-align: center;
-  }
-  .frame {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 907 / 510;
-    overflow: hidden;
-    background: #fffef6;
-    border: 6px ridge var(--silver);
-  }
-  .frame iframe {
-    position: absolute; top: 0; left: 0;
-    width: 907px; height: 510px;
-    border: 0;
-    transform: scale(var(--s));
-    transform-origin: 0 0;
-    opacity: 0;
-    transition: opacity .4s;
-  }
-  .frame iframe.ready { opacity: 1; }
-  .caption {
-    text-align: center;
-    font-size: 13px;
-    color: var(--cyan);
-    margin-top: 6px;
-  }
-  .new {
-    display: inline-block;
-    background: red;
-    color: var(--yellow);
-    font-family: "Arial Black", sans-serif;
-    font-size: 11px;
-    padding: 1px 5px;
-    margin-left: 6px;
-    transform: rotate(-8deg);
-  }
-
-  /* ---------- footer ---------- */
-  footer { text-align: center; padding: 10px 14px 40px; }
-  .webring {
-    display: inline-block;
-    border: 4px ridge var(--magenta);
-    background: #000;
-    padding: 10px 16px;
-    font-size: 15px;
-  }
-  .webring a { font-weight: bold; }
-  footer p { margin: 10px 0; }
-
-  /* ---------- guestbook dialog ---------- */
-  dialog {
-    padding: 0;
-    border: 3px outset var(--silver);
-    background: var(--silver);
-    color: #000;
-    font-family: Tahoma, Verdana, sans-serif;
-    max-width: 320px;
-  }
-  dialog::backdrop { background: rgba(0,0,0,.4); }
-  dialog .titlebar { border: 0; }
-  dialog .body { padding: 16px; font-size: 14px; display: flex; gap: 12px; align-items: flex-start; }
-  dialog .body .icon { font-size: 30px; line-height: 1; }
-  dialog form { text-align: center; padding: 0 0 14px; }
-  dialog button { font: inherit; font-size: 13px; padding: 4px 22px; background: var(--silver); border: 2px outset #fff; cursor: pointer; }
-
-  dialog.prize { max-width: 420px; width: 92vw; }
-  dialog.prize .titlebar { background: linear-gradient(90deg, #800000, #f0351f); text-shadow: none; }
-  .prize .body { display: block; text-align: center; padding: 18px 20px 6px; font-size: 17px; line-height: 1.35; }
-  .prize big {
-    display: block;
-    margin-bottom: 8px;
-    font-family: Impact, "Arial Black", sans-serif;
-    font-size: 30px;
-    color: #e3281b;
-  }
-  .prize form { padding: 14px 0 18px; }
-  .prize button { font-weight: bold; font-size: 18px; padding: 6px 28px; }
-  .prize .titlebar form { margin: 0; padding: 0; }
-  .prize .x { background: none; border: 0; color: #fff; font-size: 16px; padding: 0 4px; cursor: pointer; }
-
-  /* sparkle cursor trail */
-  .spark {
+  /* start menu */
+  #startmenu {
     position: fixed;
-    pointer-events: none;
-    font-size: 14px;
-    z-index: 9999;
-    animation: spark .8s ease-out forwards;
+    left: 2px;
+    bottom: calc(var(--taskbar-h) + env(safe-area-inset-bottom, 0px) - 2px);
+    z-index: 960;
+    display: none;
+    padding: 3px;
   }
+  #startmenu.on { display: flex; }
+  .sm-side {
+    width: 28px;
+    background: linear-gradient(0deg, #ff2bd6, #b967ff 55%, #01cdfe);
+    color: #fff;
+    display: flex; align-items: flex-end; justify-content: center;
+    padding-bottom: 8px;
+  }
+  .sm-side b { writing-mode: vertical-rl; transform: rotate(180deg); font: 900 20px/1 "Arial Black", Impact, sans-serif; letter-spacing: 1px; }
+  .sm-side b span { color: #fffb96; }
+  .sm-items { display: flex; flex-direction: column; min-width: 210px; }
+  .sm-items button {
+    display: flex; align-items: center; gap: 10px;
+    padding: 6px 18px 6px 8px;
+    background: none; border: 0; text-align: left; font-size: 13px; cursor: pointer;
+  }
+  .sm-items button:hover, .sm-items button:focus-visible { background: #000080; color: #fff; outline: none; }
+  .sm-items svg { width: 26px; height: 26px; }
+  .sm-items hr { margin: 3px 2px; border: 0; border-top: 1px solid var(--shade); border-bottom: 1px solid var(--light); }
+
+  /* shutdown */
+  #shutdown {
+    position: fixed; inset: 0; z-index: 1001;
+    background: #000; color: #ff8c1a;
+    display: none; align-items: center; justify-content: center; text-align: center;
+    font: bold clamp(20px, 4vw, 34px)/1.4 var(--ui);
+    padding: 20px; cursor: pointer;
+  }
+  #shutdown.on { display: flex; }
+  #shutdown small { display: block; margin-top: 18px; font: 13px var(--ui); color: #555; }
+
+  /* sparkles on the wallpaper only */
+  .spark { position: fixed; pointer-events: none; font-size: 14px; z-index: 5; animation: spark .8s ease-out forwards; }
   @keyframes spark { to { transform: translateY(24px) scale(.3); opacity: 0; } }
 
+  /* phones */
   @media (max-width: 760px) {
-    .layout { grid-template-columns: 1fr; }
-    aside { position: static; }
-    .jump { grid-template-columns: repeat(8, 1fr); }
-    aside .badge, #totop { display: none; }
+    #icons { grid-auto-flow: row; grid-template-columns: repeat(auto-fill, 86px); grid-template-rows: none; grid-auto-rows: 90px; right: 8px; bottom: auto; }
+    .icon { width: 86px; }
+    .vw-palm { height: 48%; }
+    .titlebar { height: 28px; }
+    .tb-btn { width: 24px; height: 22px; }
+    .task { flex-basis: 120px; }
+    #tray .date { display: none; }
+    .menubar { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .ticker span, hr.rainbow, .blink, .floor { animation: none; }
-    .ticker span { padding-left: 12px; }
-    .frame iframe { transition: none; }
+    .vw-grid, .divider, .amp.playing .lcd span { animation: none; }
+    .frame iframe, .loadbar i { transition: none; }
+    #scroller { scroll-behavior: auto; }
   }
 </style>
 </head>
 <body>
 
-<div class="floor" aria-hidden="true"></div>
-<div class="ticker" aria-hidden="true"><span>★ ☆ ★ WELCOME 2 90'S TOWN!!! ★ ☆ ★ a serialized mystery-thriller ★ ☆ ★ no iPhones. no broadband. no problem. ★ ☆ ★ don't forget 2 sign my guestbook!! ★ ☆ ★ this site is best viewed with your eyes ★ ☆ ★ 🌴 🐬 💾 ｅｎｊｏｙ ｙｏｕｒ ｓｔａｙ 🐬 🌴 ★ ☆ ★</span></div>
-
-<header>
-  <div class="title-wrap"><div class="sun" aria-hidden="true"></div><h1 class="wordart">90's TOWN</h1></div>
-  <p class="tagline">~*~ the past isn't dead. it's not even past. ~*~</p>
-  <p class="small">you have entered the official homepage <span class="blink">♥</span> scroll down 2 begin</p>
-  <div class="construction"><b>🚧 THIS SITE IS ALWAYS UNDER CONSTRUCTION 🚧</b></div>
-</header>
-
-<hr class="rainbow">
-
-<div class="layout">
-  <aside>
-    <h2>~ Jump 2 Page ~</h2>
-    <nav class="jump" id="jump" aria-label="Jump to page"></nav>
-
-    <h2>~ Visitors ~</h2>
-    <div class="counter" id="counter" aria-label="Visitor counter"></div>
-    <p class="small">u r visitor number<br>(wow!!)</p>
-
-    <button class="btn wide" id="guestbook">✍️ Sign My Guestbook!</button>
-    <a class="btn wide" href="#top-of-page" id="totop">⬆ Back 2 Top</a>
-
-    <div class="icons" aria-hidden="true">🌴🐬💾🗿</div>
-    <div class="badge">Best viewed in<br><b>Netscape Navigator</b><br>at 800 × 600</div>
-  </aside>
-
-  <main id="pages"></main>
+<!-- ============ BOOT ============ -->
+<div id="boot" role="status" aria-live="polite">
+  <pre id="bootText"></pre>
+  <div id="splash">
+    <div class="wordart">90's TOWN</div>
+    <div class="splash-sub">TOWN <b>95</b></div>
+    <div class="loadbar"><i id="loadfill"></i></div>
+  </div>
+  <div class="hint">click or press any key to skip</div>
 </div>
 
-<hr class="rainbow">
+<!-- ============ DESKTOP ============ -->
+<div id="desktop">
 
-<footer>
-  <div class="webring">
-    <a href="#" id="ringPrev">&lt;&lt; Prev</a>
-    &nbsp;|&nbsp; 📺 The 90's TV Webring 📺 &nbsp;|&nbsp;
-    <a href="#" id="ringNext">Next &gt;&gt;</a>
+  <nav id="icons" aria-label="Desktop"></nav>
+
+  <!-- Pilot script -->
+  <section class="win raised" id="w-script" data-title="90stownpilot.pdf - Town Reader" data-icon="pdf" aria-label="Pilot script">
+    <div class="titlebar"></div>
+    <div class="menubar" aria-hidden="true"><span><u>F</u>ile</span><span><u>E</u>dit</span><span><u>V</u>iew</span><span><u>W</u>indow</span><span><u>H</u>elp</span></div>
+    <div class="toolbar">
+      <button class="btn95 raised" data-nav="-1" aria-label="Previous page">◀</button>
+      <button class="btn95 raised" data-nav="1" aria-label="Next page">▶</button>
+      <div class="sep"></div>
+      <button class="btn95 raised" data-zoom="-1" aria-label="Zoom out">−</button>
+      <button class="btn95 raised" data-zoom="1" aria-label="Zoom in">+</button>
+      <div class="sep"></div>
+      <a class="btn95 raised" href="docs/90stownpilot.pdf" download>💾 Save</a>
+    </div>
+    <div class="body sunken reader"><div class="pages"></div></div>
+    <div class="statusbar"><div class="sunken" data-status>Page 1 of 55</div><div class="sunken">John Wikstrom</div></div>
+  </section>
+
+  <!-- Bible -->
+  <section class="win raised" id="w-bible" data-title="90stownbible(theanswers).pdf - Town Reader" data-icon="pdflock" aria-label="Series bible">
+    <div class="titlebar"></div>
+    <div class="menubar" aria-hidden="true"><span><u>F</u>ile</span><span><u>E</u>dit</span><span><u>V</u>iew</span><span><u>W</u>indow</span><span><u>H</u>elp</span></div>
+    <div class="toolbar">
+      <button class="btn95 raised" data-nav="-1" aria-label="Previous page">◀</button>
+      <button class="btn95 raised" data-nav="1" aria-label="Next page">▶</button>
+      <div class="sep"></div>
+      <button class="btn95 raised" data-zoom="-1" aria-label="Zoom out">−</button>
+      <button class="btn95 raised" data-zoom="1" aria-label="Zoom in">+</button>
+    </div>
+    <div class="body sunken reader"><div class="pages"></div></div>
+    <div class="statusbar"><div class="sunken" data-status>Page 1 of 10</div><div class="sunken" id="bibleState">🔒 Restricted</div></div>
+  </section>
+
+  <!-- Readme -->
+  <section class="win raised" id="w-readme" data-title="Readme.txt - Notepad" data-icon="note" aria-label="Readme">
+    <div class="titlebar"></div>
+    <div class="menubar" aria-hidden="true"><span><u>F</u>ile</span><span><u>E</u>dit</span><span><u>S</u>earch</span><span><u>H</u>elp</span></div>
+    <div class="body sunken notepad">WELCOME TO 90'S TOWN
+====================
+
+90's TOWN is a serialized mystery-thriller that asks:
+
+  What if you could bring the past back to life?
+  And what if the past wasn't what it seemed to be?
+
+It's a corporate-owned town where the late 1990s
+are recreated in every detail. People live here.
+People work here. Period accuracy is strictly
+enforced.
+
+  No iPhones.
+  No broadband.
+  No problem.
+
+ON THIS DESKTOP:
+
+  Home Page ..................... the pitch
+  90stownpilot.pdf .............. the pilot script
+  90stownbible(theanswers).pdf .. the answers
+
+- The Management</div>
+  </section>
+
+  <!-- Homepage -->
+  <section class="win raised" id="w-web" data-title="90's TOWN Home Page - Town Navigator" data-icon="globe" aria-label="Home page">
+    <div class="titlebar"></div>
+    <div class="menubar" aria-hidden="true"><span><u>F</u>ile</span><span><u>E</u>dit</span><span><u>V</u>iew</span><span><u>G</u>o</span><span><u>B</u>ookmarks</span></div>
+    <div class="toolbar"><label style="flex:1;display:flex;gap:6px;align-items:center">Location: <span class="sunken" style="flex:1;background:#fff;padding:2px 6px;font-size:12px">http://www.geocities.com/Hollywood/Hills/1998/</span></label></div>
+    <div class="body sunken" style="overflow:hidden"><iframe id="webframe" title="90's Town home page" style="width:100%;height:100%;border:0;display:block"></iframe></div>
+  </section>
+
+  <!-- TownAmp -->
+  <section class="win raised" id="w-amp" data-title="TownAmp" data-icon="cd" aria-label="Music player">
+    <div class="titlebar"></div>
+    <div class="amp" id="amp">
+      <div class="lcd"><span id="ampText">90stown_theme.mid — stopped</span></div>
+      <div class="viz" id="viz" aria-hidden="true"></div>
+      <div class="ctrls">
+        <button class="btn95 raised" id="ampPlay" aria-label="Play">▶</button>
+        <button class="btn95 raised" id="ampStop" aria-label="Stop">■</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recycle bin -->
+  <section class="win raised" id="w-bin" data-title="Recycle Bin" data-icon="bin" aria-label="Recycle Bin">
+    <div class="titlebar"></div>
+    <div class="menubar" aria-hidden="true"><span><u>F</u>ile</span><span><u>E</u>dit</span><span><u>V</u>iew</span><span><u>H</u>elp</span></div>
+    <div class="body sunken"><div class="files" id="binFiles"></div></div>
+    <div class="foot"><button class="btn95 raised" id="emptyBin">Empty Recycle Bin</button></div>
+  </section>
+
+  <!-- My Computer -->
+  <section class="win raised" id="w-pc" data-title="System Properties" data-icon="pc" aria-label="System Properties">
+    <div class="titlebar"></div>
+    <div class="panel" id="pcPanel"></div>
+    <div class="foot"><button class="btn95 raised" data-close>OK</button></div>
+  </section>
+
+  <!-- Dialogs -->
+  <div id="scrim"></div>
+  <section class="win raised dialog" id="w-alert" data-title="!!! ALERT !!!" data-icon="warn" data-dialog role="alertdialog" aria-labelledby="alertMsg">
+    <div class="titlebar"></div>
+    <div class="dlg"><span id="alertIcon"></span><div class="msg" id="alertMsg"></div></div>
+    <div class="foot"><button class="btn95 raised" data-close id="alertOk">OK</button></div>
+  </section>
+</div>
+
+<!-- ============ TASKBAR ============ -->
+<div id="taskbar">
+  <button class="btn95 raised" id="start" aria-haspopup="menu" aria-expanded="false"><span id="startLogo"></span>Start</button>
+  <div id="tasks"></div>
+  <div id="tray" class="sunken">
+    <button id="trayAmp" aria-label="Open TownAmp"></button>
+    <span id="clock"></span><span class="date" id="date"></span>
   </div>
-  <p class="small">Last updated: 9/22/1997 &nbsp;•&nbsp; Made with Notepad &amp; love</p>
-  <p class="small">© 1997 90's Town. All rights reserved. Please don't steal my graphics!!</p>
-</footer>
+</div>
 
-<dialog id="gbDialog">
-  <div class="titlebar"><span>Guestbook.exe</span><span class="ctl"><span>×</span></span></div>
-  <div class="body"><span class="icon" aria-hidden="true">⚠️</span><span>The guestbook is full!<br>Please try again in 1998.</span></div>
-  <form method="dialog"><button>OK</button></form>
-</dialog>
+<div id="startmenu" class="raised" role="menu">
+  <div class="sm-side"><b>Town<span>95</span></b></div>
+  <div class="sm-items" id="smItems"></div>
+</div>
 
-<dialog id="prize" class="prize" aria-labelledby="prizeTitle">
-  <div class="titlebar"><span>!!! ALERT !!!</span><form method="dialog"><button class="x" aria-label="Close">✕</button></form></div>
-  <div class="body">
-    <big id="prizeTitle">CONGRATULATIONS!!!</big>
-    U R THE 1,000,000th VISITOR!!!<br>
-    click OK 2 claim ur prize (the prize is more slides)
-  </div>
-  <form method="dialog"><button autofocus>OK</button></form>
-</dialog>
+<div id="shutdown" role="button" tabindex="0">It's now safe to turn off<br>your computer.<small>(click to restart)</small></div>
 
 <script>
 (function () {
-  var TOTAL = 48;
-  var main = document.getElementById('pages');
-  var jump = document.getElementById('jump');
-  var frames = [];
-  var titles = ['welcome.html'];
+  var coarse = window.matchMedia('(pointer: coarse)').matches;
+  var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function small() { return window.innerWidth < 760; }
 
-  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  /* ---------------- icons (hand-drawn SVG) ---------------- */
+  var ICONS = {
+    tv: '<svg viewBox="0 0 32 32"><path d="M11 3l5 5 5-5" stroke="#000" stroke-width="1.5" fill="none"/><rect x="2" y="8" width="28" height="20" fill="#b8b8b8" stroke="#000"/><rect x="5" y="11" width="18" height="14" fill="url(#g1)" stroke="#000"/><circle cx="26.5" cy="14" r="1.6" fill="#333"/><circle cx="26.5" cy="19" r="1.6" fill="#333"/><defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#01cdfe"/><stop offset="1" stop-color="#ff2bd6"/></linearGradient></defs></svg>',
+    note: '<svg viewBox="0 0 32 32"><rect x="6" y="4" width="20" height="25" fill="#fff" stroke="#000"/><path d="M9 11h14M9 15h14M9 19h14M9 23h10" stroke="#3a6ee8"/><path d="M8 2v5M12 2v5M16 2v5M20 2v5M24 2v5" stroke="#555" stroke-width="1.5"/></svg>',
+    globe: '<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="#2e7de0" stroke="#000"/><path d="M9 10c3 1 4 4 7 3s2 5 5 6-1 5-3 5M18 5c-1 3 2 4 4 3s4 2 4 4" stroke="#39c75a" stroke-width="3" fill="none"/><ellipse cx="16" cy="16" rx="15" ry="5" fill="none" stroke="#fff200" stroke-width="1.5" transform="rotate(-25 16 16)"/></svg>',
+    book: '<svg viewBox="0 0 32 32"><rect x="6" y="4" width="21" height="25" fill="#c21d4f" stroke="#000"/><rect x="6" y="4" width="4" height="25" fill="#8a0f33" stroke="#000"/><rect x="13" y="9" width="11" height="6" fill="#fff200" stroke="#000"/><path d="M14 12h9" stroke="#000"/></svg>',
+    cd: '<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="13" fill="url(#g2)" stroke="#000"/><circle cx="16" cy="16" r="4" fill="#fff" stroke="#000"/><circle cx="16" cy="16" r="1.5" fill="#000"/><defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e8e8e8"/><stop offset=".4" stop-color="#b967ff"/><stop offset=".6" stop-color="#3ff3ff"/><stop offset="1" stop-color="#ddd"/></linearGradient></defs></svg>',
+    bin: '<svg viewBox="0 0 32 32"><path d="M8 9h16l-2 19H10z" fill="#d9d9d9" stroke="#000"/><path d="M6 7h20v3H6z" fill="#b0b0b0" stroke="#000"/><path d="M13 13v12M16 13v12M19 13v12" stroke="#777"/><path d="M11 17l3-3 2 2" stroke="#1a8f3a" stroke-width="1.5" fill="none"/></svg>',
+    pc: '<svg viewBox="0 0 32 32"><rect x="4" y="3" width="24" height="18" fill="#d8d2b8" stroke="#000"/><rect x="7" y="6" width="18" height="12" fill="#0a0630" stroke="#000"/><path d="M11 14l3-4 3 3 2-2 2 3" stroke="#ff2bd6" fill="none"/><rect x="10" y="21" width="12" height="3" fill="#bdb79c" stroke="#000"/><rect x="3" y="24" width="26" height="5" fill="#d8d2b8" stroke="#000"/></svg>',
+    warn: '<svg viewBox="0 0 32 32"><path d="M16 3L30 28H2z" fill="#fff200" stroke="#000"/><rect x="14.5" y="11" width="3" height="10" fill="#000"/><rect x="14.5" y="23" width="3" height="3" fill="#000"/></svg>',
+    file: '<svg viewBox="0 0 32 32"><path d="M7 3h13l6 6v20H7z" fill="#fff" stroke="#000"/><path d="M20 3v6h6" fill="#ddd" stroke="#000"/></svg>',
+    app: '<svg viewBox="0 0 32 32"><rect x="4" y="6" width="24" height="20" fill="#c0c0c0" stroke="#000"/><rect x="4" y="6" width="24" height="5" fill="#000080"/><rect x="8" y="14" width="16" height="8" fill="#fff" stroke="#808080"/></svg>',
+    pdf: '<svg viewBox="0 0 32 32"><path d="M7 2h13l6 6v22H7z" fill="#fff" stroke="#000"/><path d="M20 2v6h6" fill="#ddd" stroke="#000"/><rect x="4" y="16" width="19" height="9" fill="#c21d1d" stroke="#000"/><text x="13.5" y="23.3" font-family="Arial Black,Arial" font-weight="900" font-size="7" fill="#fff" text-anchor="middle">PDF</text><path d="M10 11h10M10 13.5h7" stroke="#999"/></svg>',
+    pdflock: '<svg viewBox="0 0 32 32"><path d="M7 2h13l6 6v22H7z" fill="#fff" stroke="#000"/><path d="M20 2v6h6" fill="#ddd" stroke="#000"/><rect x="4" y="16" width="19" height="9" fill="#c21d1d" stroke="#000"/><text x="13.5" y="23.3" font-family="Arial Black,Arial" font-weight="900" font-size="7" fill="#fff" text-anchor="middle">PDF</text><path d="M10 11h10M10 13.5h7" stroke="#999"/><rect x="19" y="21" width="11" height="9" fill="#fff200" stroke="#000"/><path d="M21.5 21v-2.5a3 3 0 0 1 6 0V21" fill="none" stroke="#000" stroke-width="1.6"/><rect x="23.7" y="24" width="1.6" height="3" fill="#000"/></svg>',
+    mail: '<svg viewBox="0 0 32 32"><rect x="3" y="8" width="26" height="17" fill="#fffef0" stroke="#000"/><path d="M3 8l13 10 13-10" fill="none" stroke="#000"/><path d="M3 25l10-8M29 25l-10-8" stroke="#000"/><rect x="22" y="10" width="5" height="6" fill="#ff2bd6" stroke="#000" stroke-width=".6"/></svg>',
+    logo: '<svg viewBox="0 0 20 20"><path d="M2 4q4-2 7 0v6q-3-2-7 0z" fill="#ff2bd6"/><path d="M11 4q4-2 7 0v6q-3-2-7 0z" fill="#3ff3ff"/><path d="M2 11q4-2 7 0v6q-3-2-7 0z" fill="#fff200"/><path d="M11 11q4-2 7 0v6q-3-2-7 0z" fill="#b967ff"/></svg>',
+    power: '<svg viewBox="0 0 32 32"><circle cx="16" cy="17" r="10" fill="none" stroke="#c21d1d" stroke-width="3"/><path d="M16 4v12" stroke="#c21d1d" stroke-width="3"/></svg>'
+  };
 
-  for (var i = 0; i < TOTAL; i++) {
-    var n = i + 1;
-    var sec = document.createElement('section');
-    sec.className = 'slide';
-    sec.id = 'page-' + n;
+  var APPS = [
+    { id: 'web', name: 'Home Page', icon: 'globe' },
+    { id: 'script', name: '90stownpilot.pdf', label: '90stown<wbr>pilot.pdf', icon: 'pdf' },
+    { id: 'bible', name: '90stownbible(theanswers).pdf', label: '90stown<wbr>bible<wbr>(the<wbr>answers).pdf', icon: 'pdflock' },
+    { id: 'readme', name: 'Readme.txt', icon: 'note' },
+    { id: 'guest', name: 'Guestbook', icon: 'book' },
+    { id: 'mail', name: 'Email', icon: 'mail' },
+    { id: 'pc', name: 'My Computer', icon: 'pc' },
+    { id: 'bin', name: 'Recycle Bin', icon: 'bin' }
+  ];
 
-    var bar = document.createElement('div');
-    bar.className = 'titlebar';
-    bar.innerHTML = '<span>' + (titles[i] || 'page_' + pad(n) + '.html') + ' - Netscape</span>' +
-      '<span class="ctl" aria-hidden="true"><span>_</span><span>□</span><span>×</span></span>';
+  /* ---------------- windows ---------------- */
+  var desktop = document.getElementById('desktop');
+  var tasks = document.getElementById('tasks');
+  var z = 20;
+  var taskBtns = {};
 
-    var frame = document.createElement('div');
-    frame.className = 'frame';
-    var f = document.createElement('iframe');
-    f.setAttribute('scrolling', 'no');
-    f.setAttribute('title', 'Page ' + n);
-    f.dataset.src = 'pub/html/' + (i === 0 ? 'publication.html' : 'publication-' + i + '.html');
-    f.addEventListener('load', onFrameLoad);
-    frame.appendChild(f);
+  function winEl(id) { return document.getElementById('w-' + id); }
 
-    var cap = document.createElement('div');
-    cap.className = 'caption';
-    cap.innerHTML = '~ Page ' + n + ' of ' + TOTAL + ' ~' + (i === 0 ? '<span class="new blink">NEW!</span>' : '');
-
-    sec.appendChild(bar);
-    sec.appendChild(frame);
-    sec.appendChild(cap);
-    main.appendChild(sec);
-    frames.push(f);
-
-    var a = document.createElement('a');
-    a.className = 'btn';
-    a.href = '#page-' + n;
-    a.textContent = n;
-    jump.appendChild(a);
-  }
-
-  document.body.id = 'top-of-page';
-
-  // scale the fixed 907×510 slides to the column
-  function rescale() {
-    var el = document.querySelector('.frame');
-    var w = el.clientWidth; // inside the ridge border
-    document.documentElement.style.setProperty('--s', w / 907);
-  }
-  rescale();
-  window.addEventListener('resize', rescale);
-
-  function onFrameLoad(e) {
-    var f = e.target;
-    if (!f.getAttribute('src')) return;
-    f.classList.add('ready');
-    if (f.dataset.visible === '1') play(f);
-  }
-  function play(f) {
-    if (f.dataset.played === '1' || !f.classList.contains('ready')) return;
-    f.dataset.played = '1';
-    try { f.contentWindow.postMessage('page:play', '*'); } catch (err) {}
-  }
-
-  var loader = new IntersectionObserver(function (entries) {
-    entries.forEach(function (en) {
-      if (!en.isIntersecting) return;
-      var f = en.target.querySelector('iframe');
-      if (!f.getAttribute('src')) f.setAttribute('src', f.dataset.src);
-      loader.unobserve(en.target);
+  document.querySelectorAll('.win').forEach(function (w) {
+    var dialog = w.hasAttribute('data-dialog');
+    var tb = w.querySelector('.titlebar');
+    tb.innerHTML = ICONS[w.dataset.icon] + '<span class="t">' + w.dataset.title + '</span>' +
+      (dialog ? '' : '<button class="tb-btn raised" data-act="min" aria-label="Minimize">_</button><button class="tb-btn raised" data-act="max" aria-label="Maximize">□</button>') +
+      '<button class="tb-btn raised x" data-act="close" aria-label="Close">×</button>';
+    tb.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-act]');
+      if (!b) return;
+      var id = w.id.slice(2);
+      if (b.dataset.act === 'close') closeWin(id);
+      if (b.dataset.act === 'min') minimize(id);
+      if (b.dataset.act === 'max') w.classList.toggle('max');
     });
-  }, { rootMargin: '150% 0px' });
-
-  var buttons = jump.querySelectorAll('.btn');
-  var player = new IntersectionObserver(function (entries) {
-    entries.forEach(function (en) {
-      var idx = Array.prototype.indexOf.call(main.children, en.target);
-      if (en.isIntersecting) {
-        var f = en.target.querySelector('iframe');
-        f.dataset.visible = '1';
-        play(f);
-        buttons.forEach(function (b) { b.classList.remove('on'); });
-        if (buttons[idx]) buttons[idx].classList.add('on');
-        if (idx === 43) showPrize();
-      }
-    });
-  }, { threshold: 0.5 });
-
-  Array.prototype.forEach.call(main.children, function (s) {
-    loader.observe(s.querySelector('.frame'));
-    player.observe(s);
+    tb.addEventListener('dblclick', function (e) { if (!dialog && !e.target.closest('[data-act]')) w.classList.toggle('max'); });
+    w.addEventListener('pointerdown', function () { focusWin(w.id.slice(2)); });
+    w.querySelectorAll('[data-close]').forEach(function (b) { b.addEventListener('click', function () { closeWin(w.id.slice(2)); }); });
+    if (!dialog) makeDraggable(w, tb);
   });
 
-  // visitor counter (counts this browser's visits on top of a very authentic base number)
+  function makeDraggable(w, handle) {
+    var sx, sy, ox, oy, drag = false;
+    handle.addEventListener('pointerdown', function (e) {
+      if (e.target.closest('[data-act]') || w.classList.contains('max') || small()) return;
+      drag = true; sx = e.clientX; sy = e.clientY; ox = w.offsetLeft; oy = w.offsetTop;
+      handle.setPointerCapture(e.pointerId);
+    });
+    handle.addEventListener('pointermove', function (e) {
+      if (!drag) return;
+      var nx = ox + e.clientX - sx, ny = oy + e.clientY - sy;
+      nx = Math.max(-w.offsetWidth + 80, Math.min(desktop.clientWidth - 80, nx));
+      ny = Math.max(0, Math.min(desktop.clientHeight - 30, ny));
+      w.style.left = nx + 'px'; w.style.top = ny + 'px';
+    });
+    handle.addEventListener('pointerup', function () { drag = false; });
+    handle.addEventListener('pointercancel', function () { drag = false; });
+  }
+
+  var placed = {};
+  function place(id) {
+    var w = winEl(id), D = desktop.getBoundingClientRect();
+    if (small() && !w.hasAttribute('data-dialog')) { w.classList.add('max'); return; }
+    var sizes = {
+      script: [Math.min(820, D.width - 40), D.height - 30],
+      bible: [Math.min(820, D.width - 40), D.height - 30],
+      readme: [Math.min(470, D.width - 40), Math.min(470, D.height - 60)],
+      web: [Math.min(1280, D.width - 130), D.height - 20],
+      amp: [290, 0],
+      bin: [Math.min(460, D.width - 40), Math.min(330, D.height - 60)],
+      pc: [Math.min(430, D.width - 40), 0],
+      alert: [0, 0]
+    }[id] || [400, 300];
+    if (sizes[0]) w.style.width = sizes[0] + 'px';
+    if (sizes[1]) w.style.height = sizes[1] + 'px';
+    var W = w.offsetWidth || sizes[0], H = w.offsetHeight || sizes[1];
+    var x, y;
+    if (id === 'web') { x = Math.max(110, (D.width - W) / 2 + 50); y = 10; }
+    else if (id === 'script' || id === 'bible') { x = (D.width - W) / 2 + (id === 'bible' ? 40 : 0); y = 14 + (id === 'bible' ? 12 : 0); }
+    else if (w.hasAttribute('data-dialog')) { x = (D.width - W) / 2; y = Math.max(20, (D.height - H) / 2 - 30); }
+    else {
+      var n = Object.keys(placed).length;
+      x = Math.min(D.width - W - 10, 140 + n * 34); y = Math.min(D.height - H - 10, 40 + n * 30);
+    }
+    w.style.left = Math.max(0, x) + 'px'; w.style.top = Math.max(0, y) + 'px';
+    placed[id] = true;
+  }
+
+  function openWin(id) {
+    closeStart();
+    if (id === 'guest') return guestbook();
+    if (id === 'mail') { window.location.href = 'mailto:johntwikstrom@gmail.com?subject=' + encodeURIComponent("90's Town"); return; }
+    var w = winEl(id);
+    if (!w) return;
+    var first = !w.classList.contains('open');
+    w.classList.add('open'); w.classList.remove('min');
+    if (first) {
+      if (!placed[id] || w.hasAttribute('data-dialog')) place(id);
+      if (id === 'web') { document.getElementById('webframe').src = 'geocities.html'; }
+      if (id === 'script' || id === 'bible') initReader(id);
+      if (!w.hasAttribute('data-dialog')) addTask(id);
+    }
+    focusWin(id);
+    if (w.hasAttribute('data-dialog')) {
+      document.getElementById('scrim').classList.add('on');
+      var ok = w.querySelector('[data-close]'); if (ok) ok.focus();
+    }
+  }
+  function openAnimated(id, fromEl) {
+    var w = winEl(id);
+    if (calm || !fromEl) return openWin(id);
+    w.style.visibility = 'hidden';
+    openWin(id);
+    var a = fromEl.getBoundingClientRect(), b = w.getBoundingClientRect();
+    var r = document.createElement('div');
+    r.className = 'zoomrect';
+    r.style.left = a.left + 'px'; r.style.top = a.top + 'px'; r.style.width = a.width + 'px'; r.style.height = a.height + 'px';
+    document.body.appendChild(r);
+    void r.offsetWidth;
+    r.style.left = b.left + 'px'; r.style.top = b.top + 'px'; r.style.width = b.width + 'px'; r.style.height = b.height + 'px';
+    setTimeout(function () { r.remove(); w.style.visibility = ''; }, 400);
+  }
+
+  function closeWin(id) {
+    var w = winEl(id);
+    w.classList.remove('open', 'active', 'min');
+    if (w.hasAttribute('data-dialog')) document.getElementById('scrim').classList.remove('on');
+    if (taskBtns[id]) { taskBtns[id].remove(); delete taskBtns[id]; }
+    if (id === 'amp') stopMusic();
+    if (id === 'web') { document.getElementById('webframe').src = 'about:blank'; }
+  }
+  function minimize(id) {
+    var w = winEl(id);
+    w.classList.add('min'); w.classList.remove('active');
+    if (taskBtns[id]) taskBtns[id].classList.remove('down');
+  }
+  function focusWin(id) {
+    var w = winEl(id);
+    document.querySelectorAll('.win.active').forEach(function (o) { o.classList.remove('active'); });
+    Object.keys(taskBtns).forEach(function (k) { taskBtns[k].classList.toggle('down', k === id); });
+    w.classList.add('active');
+    w.style.zIndex = w.hasAttribute('data-dialog') ? 1000 : ++z;
+  }
+  function addTask(id) {
+    var w = winEl(id);
+    var b = document.createElement('button');
+    b.className = 'btn95 raised task';
+    b.innerHTML = ICONS[w.dataset.icon] + '<span>' + w.dataset.title + '</span>';
+    b.addEventListener('click', function () {
+      if (w.classList.contains('min')) { w.classList.remove('min'); focusWin(id); }
+      else if (w.classList.contains('active')) minimize(id);
+      else focusWin(id);
+    });
+    tasks.appendChild(b);
+    taskBtns[id] = b;
+  }
+
+  /* ---------------- desktop icons ---------------- */
+  var iconsNav = document.getElementById('icons');
+  APPS.forEach(function (a) {
+    var b = document.createElement('button');
+    b.className = 'icon';
+    b.innerHTML = ICONS[a.icon] + '<span>' + (a.label || a.name) + '</span>';
+    b.setAttribute('aria-label', 'Open ' + a.name);
+    b.addEventListener('click', function (e) {
+      document.querySelectorAll('.icon.sel').forEach(function (o) { o.classList.remove('sel'); });
+      b.classList.add('sel');
+      if (coarse || e.detail === 0) openWin(a.id);   // tap, or keyboard Enter/Space
+    });
+    b.addEventListener('dblclick', function () { openWin(a.id); });
+    iconsNav.appendChild(b);
+  });
+  desktop.addEventListener('pointerdown', function (e) {
+    if (!e.target.closest('.icon')) document.querySelectorAll('.icon.sel').forEach(function (o) { o.classList.remove('sel'); });
+  });
+
+  /* ---------------- start menu ---------------- */
+  var startBtn = document.getElementById('start');
+  var sm = document.getElementById('startmenu');
+  document.getElementById('startLogo').innerHTML = ICONS.logo;
+  var smItems = document.getElementById('smItems');
+  APPS.forEach(function (a) {
+    var b = document.createElement('button');
+    b.setAttribute('role', 'menuitem');
+    b.innerHTML = ICONS[a.icon] + a.name;
+    b.addEventListener('click', function () { openWin(a.id); });
+    smItems.appendChild(b);
+  });
+  smItems.appendChild(document.createElement('hr'));
+  var sd = document.createElement('button');
+  sd.setAttribute('role', 'menuitem');
+  sd.innerHTML = ICONS.power + 'Shut Down...';
+  sd.addEventListener('click', function () { closeStart(); stopMusic(); document.getElementById('shutdown').classList.add('on'); });
+  smItems.appendChild(sd);
+  function closeStart() { sm.classList.remove('on'); startBtn.classList.remove('down'); startBtn.setAttribute('aria-expanded', 'false'); }
+  startBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var on = !sm.classList.contains('on');
+    sm.classList.toggle('on', on); startBtn.classList.toggle('down', on); startBtn.setAttribute('aria-expanded', String(on));
+    if (on) smItems.querySelector('button').focus();
+  });
+  document.addEventListener('pointerdown', function (e) { if (!e.target.closest('#startmenu, #start')) closeStart(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    closeStart();
+    var alertW = winEl('alert');
+    if (alertW.classList.contains('open')) closeWin('alert');
+  });
+  var shutdown = document.getElementById('shutdown');
+  function restart() { try { sessionStorage.removeItem('town95-booted'); } catch (e) {} location.reload(); }
+  shutdown.addEventListener('click', restart);
+  shutdown.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') restart(); });
+
+  /* ---------------- clock ---------------- */
+  var clock = document.getElementById('clock'), dateEl = document.getElementById('date');
+  function tick() {
+    var d = new Date();
+    clock.textContent = d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    dateEl.textContent = (d.getMonth() + 1) + '/' + d.getDate() + '/98';
+  }
+  tick(); setInterval(tick, 15000);
+  document.getElementById('trayAmp').innerHTML = ICONS.mail;
+  document.getElementById('trayAmp').setAttribute('aria-label', 'Email');
+  document.getElementById('trayAmp').addEventListener('click', function () { openWin('mail'); });
+
+  /* ---------------- visitor counter ---------------- */
   var visits = 1;
   try {
     visits = parseInt(localStorage.getItem('90stown-visits') || '0', 10) + 1;
     localStorage.setItem('90stown-visits', String(visits));
-  } catch (err) {}
-  var digits = String(41997 + visits).padStart(6, '0');
-  document.getElementById('counter').innerHTML = digits.split('').map(function (d) { return '<i>' + d + '</i>'; }).join('');
+  } catch (e) {}
+  var counterHTML = '<span class="counter">' + String(41997 + visits).padStart(6, '0').split('').map(function (d) { return '<i>' + d + '</i>'; }).join('') + '</span>';
 
-  // millionth-visitor prize, shown once when page 44 comes into view
-  var prize = document.getElementById('prize');
-  var prizeShown = false;
-  function showPrize() {
-    if (prizeShown || !prize.showModal) return;
-    prizeShown = true;
-    prize.showModal();
+  /* ---------------- alerts ---------------- */
+  document.getElementById('alertIcon').innerHTML = ICONS.warn;
+  function alert95(title, html) {
+    var w = winEl('alert');
+    w.dataset.title = title;
+    w.querySelector('.titlebar .t').textContent = title;
+    document.getElementById('alertMsg').innerHTML = html;
+    openWin('alert');
+  }
+  function guestbook() {
+    alert95('Guestbook.exe', 'The guestbook is full!<br>Please try again in 1999.');
   }
 
-  // guestbook
-  var dlg = document.getElementById('gbDialog');
-  document.getElementById('guestbook').addEventListener('click', function () {
-    if (dlg.showModal) dlg.showModal(); else alert('The guestbook is full! Please try again in 1998.');
+  /* ---------------- My Computer ---------------- */
+  document.getElementById('pcPanel').innerHTML = ICONS.pc +
+    '<dl><dt>System:</dt><dd>Town 95<br>4.00.950 B</dd>' +
+    '<dt>Registered to:</dt><dd>Omnicom Corporation<br>90\'s Town, USA</dd>' +
+    '<dt>Computer:</dt><dd>486DX2 / 66 MHz<br>16.0 MB RAM</dd>' +
+    '<dt>Visitors:</dt><dd>' + counterHTML + '</dd></dl>';
+
+  /* ---------------- Recycle Bin ---------------- */
+  var trash = [['iPhone.exe', 'app'], ['broadband.dll', 'file'], ['the_future.zip', 'file'], ['group_chat.log', 'file'], ['streaming_services', 'app'], ['Y2K_bug.txt', 'note'], ['cell_jammer.exe', 'app']];
+  document.getElementById('binFiles').innerHTML = trash.map(function (t) {
+    return '<div class="file">' + ICONS[t[1]] + '<span>' + t[0] + '</span></div>';
+  }).join('');
+  document.getElementById('emptyBin').addEventListener('click', function () {
+    alert95('Recycle Bin', 'Cannot delete <b>the_future.zip</b>:<br>it hasn\'t happened yet.');
   });
 
-  // webring: prev / next page
-  function currentIndex() {
-    var on = jump.querySelector('.on');
-    return on ? Array.prototype.indexOf.call(buttons, on) : 0;
+  /* ---------------- Town Reader: pilot script + bible ---------------- */
+  var readers = {};
+  function pad2(n) { return (n < 10 ? '0' : '') + n; }
+  function norm(pw) { return String(pw).toLowerCase().replace(/[^a-z0-9]/g, ''); }
+
+  function initReader(id) {
+    if (readers[id]) return;
+    var w = winEl(id);
+    var body = w.querySelector('.reader');
+    var pagesEl = w.querySelector('.pages');
+    var statusEl = w.querySelector('[data-status]');
+    var R = readers[id] = { total: id === 'script' ? 55 : 10, limit: id === 'script' ? 55 : 2, imgs: [], pw: 860 };
+
+    function addImg(src, n) {
+      var im = document.createElement('img');
+      im.src = src; im.alt = 'Page ' + n; im.loading = 'lazy'; im.decoding = 'async';
+      pagesEl.appendChild(im);
+      R.imgs.push(im);
+      return im;
+    }
+    var shown = id === 'script' ? 55 : 2;
+    var folder = id === 'script' ? 'docs/script/p-' : 'docs/bible/p-';
+    for (var n = 1; n <= shown; n++) addImg(folder + pad2(n) + '.jpg', n);
+
+    function currentPage() {
+      var top = body.scrollTop + body.clientHeight * 0.35, cur = 0;
+      R.imgs.forEach(function (im, i) { if (im.offsetTop <= top) cur = i; });
+      return cur;
+    }
+    function update() { statusEl.textContent = 'Page ' + (currentPage() + 1) + ' of ' + R.total; }
+    body.addEventListener('scroll', update, { passive: true });
+
+    w.querySelectorAll('[data-nav]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var target = currentPage() + parseInt(b.dataset.nav, 10);
+        if (target >= R.imgs.length) {
+          var lock = pagesEl.querySelector('.lock');
+          if (lock) { body.scrollTo({ top: lock.offsetTop - 10, behavior: calm ? 'auto' : 'smooth' }); lock.querySelector('input').focus({ preventScroll: true }); }
+          return;
+        }
+        target = Math.max(0, target);
+        body.scrollTo({ top: R.imgs[target].offsetTop - 12, behavior: calm ? 'auto' : 'smooth' });
+      });
+    });
+    w.querySelectorAll('[data-zoom]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var at = currentPage();
+        R.pw = Math.max(420, Math.min(1400, R.pw + parseInt(b.dataset.zoom, 10) * 140));
+        body.style.setProperty('--pw', R.pw + 'px');
+        if (R.imgs[at]) body.scrollTop = R.imgs[at].offsetTop - 12;
+      });
+    });
+
+    if (id === 'bible') buildLock(pagesEl, body, addImg, R, update);
   }
-  document.getElementById('ringPrev').addEventListener('click', function (e) {
-    e.preventDefault();
-    main.children[Math.max(0, currentIndex() - 1)].scrollIntoView();
-  });
-  document.getElementById('ringNext').addEventListener('click', function (e) {
-    e.preventDefault();
-    main.children[Math.min(TOTAL - 1, currentIndex() + 1)].scrollIntoView();
-  });
-  document.getElementById('totop').addEventListener('click', function (e) {
-    e.preventDefault();
-    window.scrollTo(0, 0);
-  });
 
-  // sparkle cursor trail (skipped for reduced motion and touch screens)
-  var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var fine = window.matchMedia('(pointer: fine)').matches;
-  if (!calm && fine) {
-    var glyphs = ['✦', '✧', '★', '·'];
-    var colors = ['#fff200', '#ff2bd6', '#3ff3ff', '#ffffff'];
-    var last = 0;
-    document.addEventListener('mousemove', function (e) {
-      var now = Date.now();
-      if (now - last < 40) return;
-      last = now;
+  /* ---- bible lock: pages 3-10 ship encrypted and can only be decrypted with the password ---- */
+  function buildLock(pagesEl, body, addImg, R, update) {
+    var lock = document.createElement('div');
+    lock.className = 'lock';
+    lock.innerHTML =
+      '<span class="spoiler"><b>⚠ SPOILER WARNING ⚠</b></span>' +
+      '<div><span class="stamp">RESTRICTED</span></div>' +
+      '<p><b>Pages 3 through 10 are sealed.</b></p>' +
+      '<p>Beyond this point: what is really going on in 90\'s Town, who (or what) killed Carl Bridgewater, and where the whole thing is headed.</p>' +
+      '<p>Read the pilot first. Then, if you have clearance, enter the password.</p>' +
+      '<span class="redact" style="width:78%"></span><span class="redact" style="width:64%"></span><span class="redact" style="width:71%"></span>' +
+      '<form autocomplete="off"><input type="password" placeholder="PASSWORD" aria-label="Password" spellcheck="false"><button class="btn95 raised" type="submit">Unlock</button></form>' +
+      '<div class="err" role="alert" aria-live="assertive"></div>';
+    pagesEl.appendChild(lock);
+    var input = lock.querySelector('input'), err = lock.querySelector('.err'), form = lock.querySelector('form');
+
+    function loadLocked() {
+      return new Promise(function (res, rej) {
+        if (window.BIBLE_LOCKED) return res(window.BIBLE_LOCKED);
+        var sc = document.createElement('script');
+        sc.src = 'docs/bible/locked.js';
+        sc.onload = function () { res(window.BIBLE_LOCKED); };
+        sc.onerror = rej;
+        document.head.appendChild(sc);
+      });
+    }
+    function b64(s) { var bin = atob(s), a = new Uint8Array(bin.length); for (var i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i); return a; }
+
+    function unlock(pw, quiet) {
+      if (!window.crypto || !crypto.subtle) { err.textContent = 'This browser can\'t open sealed pages. Try Chrome, Safari or Firefox.'; return; }
+      err.textContent = quiet ? '' : 'CHECKING CLEARANCE...';
+      return loadLocked().then(function (L) {
+        return crypto.subtle.importKey('raw', new TextEncoder().encode(norm(pw)), 'PBKDF2', false, ['deriveKey']).then(function (base) {
+          return crypto.subtle.deriveKey({ name: 'PBKDF2', salt: b64(L.salt), iterations: L.iter, hash: 'SHA-256' }, base, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+        }).then(function (key) {
+          return Promise.all(L.pages.map(function (pg) {
+            return crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64(pg.iv) }, key, b64(pg.d));
+          }));
+        });
+      }).then(function (bufs) {
+        try { sessionStorage.setItem('town95-clearance', pw); } catch (e) {}
+        var banner = document.createElement('div');
+        banner.className = 'unlocked-banner';
+        banner.textContent = '▼ CLEARANCE GRANTED — SPOILERS BELOW ▼';
+        pagesEl.replaceChild(banner, lock);
+        bufs.forEach(function (buf, i) {
+          addImg(URL.createObjectURL(new Blob([buf], { type: 'image/jpeg' })), i + 3);
+        });
+        R.limit = R.total;
+        document.getElementById('bibleState').textContent = '🔓 Clearance granted';
+        update();
+      }).catch(function () {
+        if (quiet) { err.textContent = ''; return; }
+        err.textContent = 'ACCESS DENIED';
+        input.value = '';
+        lock.classList.remove('shake'); void lock.offsetWidth; lock.classList.add('shake');
+        input.focus();
+      });
+    }
+    form.addEventListener('submit', function (e) { e.preventDefault(); if (input.value.trim()) unlock(input.value); });
+    var saved = null;
+    try { saved = sessionStorage.getItem('town95-clearance'); } catch (e) {}
+    if (saved) unlock(saved, true);
+  }
+
+  /* ---------------- TownAmp (original chiptune, plays only on request) ---------------- */
+  var viz = document.getElementById('viz');
+  for (var v = 0; v < 16; v++) viz.appendChild(document.createElement('i'));
+  var ctx = null, timer = null, vizTimer = null, tempo = 0.16;
+  var melody = [
+    [76,1],[79,1],[83,2],[81,1],[79,1],[76,2],[74,1],[76,1],[79,2],[0,2],
+    [72,1],[76,1],[79,2],[77,1],[76,1],[72,2],[71,1],[72,1],[74,2],[0,2],
+    [76,1],[79,1],[84,2],[83,1],[81,1],[79,2],[81,1],[79,1],[76,2],[74,2],
+    [72,1],[74,1],[76,1],[79,1],[76,2],[74,2],[72,4]
+  ];
+  var bass = [48, 48, 45, 45, 41, 41, 43, 43];
+  function hz(n) { return 440 * Math.pow(2, (n - 69) / 12); }
+  function blip(freq, start, dur, type, vol) {
+    var o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = type; o.frequency.value = freq;
+    g.gain.setValueAtTime(vol, start);
+    g.gain.exponentialRampToValueAtTime(0.0001, start + dur * 0.95);
+    o.connect(g); g.connect(ctx.destination);
+    o.start(start); o.stop(start + dur);
+  }
+  function schedule() {
+    var now = ctx.currentTime + 0.05, t = now, total = 0;
+    melody.forEach(function (m) { if (m[0]) blip(hz(m[0]), t, m[1] * tempo, 'square', 0.05); t += m[1] * tempo; total += m[1]; });
+    var bt = now, beat = total * tempo / bass.length;
+    bass.forEach(function (b) { blip(hz(b), bt, beat, 'triangle', 0.1); bt += beat; });
+    timer = setTimeout(schedule, total * tempo * 1000);
+  }
+  var amp = document.getElementById('amp'), ampText = document.getElementById('ampText');
+  function playMusic() {
+    if (timer) return;
+    try {
+      ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
+      ctx.resume(); schedule();
+      amp.classList.add('playing');
+      ampText.textContent = '*** 90stown_theme.mid *** now playing *** 128 kbps ***';
+      if (!calm) vizTimer = setInterval(function () {
+        viz.querySelectorAll('i').forEach(function (b) { b.style.height = (10 + Math.random() * 90) + '%'; });
+      }, 120);
+    } catch (e) { ampText.textContent = 'no sound card detected :('; }
+  }
+  function stopMusic() {
+    clearTimeout(timer); timer = null;
+    clearInterval(vizTimer);
+    viz.querySelectorAll('i').forEach(function (b) { b.style.height = '8%'; });
+    if (ctx) { ctx.close(); ctx = null; }
+    amp.classList.remove('playing');
+    ampText.textContent = '90stown_theme.mid — stopped';
+  }
+  document.getElementById('ampPlay').addEventListener('click', playMusic);
+  document.getElementById('ampStop').addEventListener('click', stopMusic);
+
+  /* ---------------- sparkles over the wallpaper ---------------- */
+  if (!calm && !coarse) {
+    var glyphs = ['✦', '✧', '★', '·'], colors = ['#fff200', '#ff2bd6', '#3ff3ff', '#ffffff'], last = 0;
+    desktop.addEventListener('mousemove', function (e) {
+      if (e.target.closest('.win')) return;
+      var now = Date.now(); if (now - last < 40) return; last = now;
       var s = document.createElement('span');
       s.className = 'spark';
       s.textContent = glyphs[Math.floor(Math.random() * glyphs.length)];
       s.style.color = colors[Math.floor(Math.random() * colors.length)];
-      s.style.left = (e.clientX + 6) + 'px';
-      s.style.top = (e.clientY + 6) + 'px';
+      s.style.left = (e.clientX + 6) + 'px'; s.style.top = (e.clientY + 6) + 'px';
       document.body.appendChild(s);
       setTimeout(function () { s.remove(); }, 800);
     });
   }
+
+  /* ---------------- boot sequence ---------------- */
+  var boot = document.getElementById('boot');
+  var bootText = document.getElementById('bootText');
+  var splash = document.getElementById('splash');
+  var fill = document.getElementById('loadfill');
+  var bootDone = false, timers = [];
+  function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+  function finishBoot() {
+    if (bootDone) return;
+    bootDone = true;
+    timers.forEach(function (h) { clearTimeout(h); clearInterval(h); });
+    boot.remove();
+    try { sessionStorage.setItem('town95-booted', '1'); } catch (e) {}
+    openWin('readme'); minimize('readme');
+    var cancelled = false;
+    function cancel() { cancelled = true; document.body.classList.remove('busy'); }
+    iconsNav.addEventListener('dblclick', cancel, { once: true });
+    startBtn.addEventListener('click', cancel, { once: true });
+    setTimeout(function () {
+      if (cancelled) return;
+      var homeIcon = iconsNav.querySelector('.icon');
+      document.querySelectorAll('.icon.sel').forEach(function (o) { o.classList.remove('sel'); });
+      homeIcon.classList.add('sel');
+      document.body.classList.add('busy');
+      setTimeout(function () {
+        document.body.classList.remove('busy');
+        if (cancelled) return;
+        openAnimated('web', homeIcon);
+      }, calm ? 0 : 450);
+    }, calm ? 300 : 1600);
+  }
+  var seen = false;
+  try { seen = sessionStorage.getItem('town95-booted') === '1'; } catch (e) {}
+  if (seen || calm) {
+    finishBoot();
+  } else {
+    var lines = [
+      'OmniBIOS (C) 1998 Omnicom Corporation',
+      '90\'s TOWN Municipal Workstation #0451',
+      '',
+      'Memory Test: ',
+      '',
+      'Detecting drives ...  TOWN_HD (C:)',
+      'Period accuracy check ...  OK',
+      'Broadband ...  NOT FOUND (as intended)',
+      'Cell signal ...  NONE (cause unknown)',
+      '',
+      'Starting Town 95...'
+    ];
+    var shown = [], t = 0;
+    function render() { bootText.textContent = shown.join('\n'); }
+    lines.forEach(function (l, i) {
+      later(function () {
+        shown.push(l); render();
+        if (i === 3) {
+          var k = 0, row = shown.length - 1;
+          var mem = setInterval(function () {
+            k += 1024;
+            shown[row] = 'Memory Test: ' + k + 'K' + (k >= 16384 ? ' OK' : '');
+            render();
+            if (k >= 16384) clearInterval(mem);
+          }, 30);
+          timers.push(mem);
+        }
+      }, t);
+      t += i === 3 ? 650 : 170;
+    });
+    later(function () { bootText.style.display = 'none'; splash.classList.add('on'); }, t + 300);
+    [20, 45, 70, 100].forEach(function (p, i) { later(function () { fill.style.width = p + '%'; }, t + 500 + i * 320); });
+    later(finishBoot, t + 2000);
+    boot.addEventListener('click', finishBoot);
+    document.addEventListener('keydown', function onKey() { document.removeEventListener('keydown', onKey); finishBoot(); });
+  }
+
+  window.addEventListener('resize', function () {
+    if (small()) document.querySelectorAll('.win.open:not([data-dialog])').forEach(function (w) { w.classList.add('max'); });
+  });
 })();
 </script>
 </body>

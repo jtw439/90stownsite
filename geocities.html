@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>~*~ Welcome 2 90's TOWN ~*~</title>
+<style>
+  :root {
+    --magenta: #ff2bd6;
+    --cyan: #3ff3ff;
+    --yellow: #fff200;
+    --lime: #39ff14;
+    --navy: #0a0630;
+    --silver: #c0c0c0;
+    --s: 1;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    color: #fff;
+    font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE", "Comic Neue", cursive;
+    /* hand-rolled starfield tile */
+    background-color: var(--navy);
+    background-image:
+      radial-gradient(1.5px 1.5px at 20px 30px, #fff 50%, transparent 51%),
+      radial-gradient(1px 1px at 90px 120px, #fff 50%, transparent 51%),
+      radial-gradient(2px 2px at 150px 60px, var(--yellow) 50%, transparent 51%),
+      radial-gradient(1px 1px at 60px 170px, var(--cyan) 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 180px 190px, #fff 50%, transparent 51%),
+      radial-gradient(1px 1px at 120px 20px, var(--magenta) 50%, transparent 51%);
+    background-size: 200px 200px;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  a { color: var(--cyan); }
+  a:visited { color: var(--magenta); }
+
+  /* ---------- vaporwave layer ---------- */
+  .floor {
+    position: fixed;
+    left: -50%; right: -50%;
+    bottom: -22vh;
+    height: 44vh;
+    z-index: -1;
+    background-image:
+      linear-gradient(rgba(255,43,214,.16) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,43,214,.16) 1px, transparent 1px);
+    background-size: 70px 70px;
+    transform: perspective(300px) rotateX(62deg);
+    transform-origin: top;
+    animation: drive 7s linear infinite;
+    -webkit-mask: linear-gradient(transparent, #000 60%);
+            mask: linear-gradient(transparent, #000 60%);
+  }
+  @keyframes drive { to { background-position: 0 70px; } }
+  .title-wrap { position: relative; display: inline-block; isolation: isolate; margin-bottom: 30px; }
+  .sun {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: clamp(130px, 22vw, 250px);
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #ffe08a 5%, #ff8f6b 45%, #ff2bd6 85%);
+    -webkit-mask: linear-gradient(#000 0 48%, transparent 48% 53%, #000 53% 60%, transparent 60% 66%, #000 66% 72%, transparent 72% 79%, #000 79% 84%, transparent 84%);
+            mask: linear-gradient(#000 0 48%, transparent 48% 53%, #000 53% 60%, transparent 60% 66%, #000 66% 72%, transparent 72% 79%, #000 79% 84%, transparent 84%);
+    filter: drop-shadow(0 0 18px rgba(255,43,214,.45));
+    opacity: .8;
+  }
+  header > p, header > .construction { position: relative; z-index: 1; }
+  .tagline { text-shadow: 0 0 6px #0a0630, 0 0 12px #0a0630; }
+  .icons { margin-top: 12px; font-size: 22px; letter-spacing: 6px; }
+
+  /* ---------- top marquee ---------- */
+  .ticker {
+    background: #000;
+    border-top: 3px ridge var(--silver);
+    border-bottom: 3px ridge var(--silver);
+    color: var(--lime);
+    font-family: "Courier New", Courier, monospace;
+    font-weight: bold;
+    font-size: 15px;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 6px 0;
+  }
+  .ticker span {
+    display: inline-block;
+    padding-left: 100%;
+    animation: ticker 28s linear infinite;
+  }
+  @keyframes ticker { to { transform: translateX(-100%); } }
+
+  /* ---------- header ---------- */
+  header { text-align: center; padding: 92px 12px 8px; }
+  .wordart {
+    margin: 0;
+    font-family: Impact, "Arial Black", "Haettenschweiler", sans-serif;
+    font-size: clamp(56px, 13vw, 150px);
+    line-height: .95;
+    letter-spacing: 2px;
+    background: linear-gradient(180deg, var(--yellow) 0%, #ff8a00 35%, var(--magenta) 65%, #7b2bff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-stroke: 2px #fff;
+    filter: drop-shadow(5px 5px 0 var(--cyan)) drop-shadow(5px 5px 0 #000);
+    transform: skewY(-4deg) perspective(400px) rotateX(8deg);
+    display: inline-block;
+  }
+  .tagline {
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
+    font-size: clamp(18px, 3vw, 26px);
+    color: var(--yellow);
+    margin: 22px 0 6px;
+  }
+  .blink { animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { visibility: hidden; } }
+
+  .construction {
+    max-width: 640px;
+    margin: 18px auto 0;
+    padding: 8px 12px;
+    background: repeating-linear-gradient(-45deg, var(--yellow) 0 18px, #000 18px 36px);
+    border: 3px outset var(--silver);
+  }
+  .construction b {
+    display: block;
+    background: #000;
+    color: var(--yellow);
+    font-family: "Arial Black", Impact, sans-serif;
+    font-size: clamp(14px, 2.6vw, 20px);
+    padding: 6px;
+    letter-spacing: 1px;
+  }
+
+  hr.rainbow {
+    border: 0;
+    height: 6px;
+    margin: 26px auto;
+    width: min(92%, 900px);
+    background: linear-gradient(90deg, red, orange, yellow, lime, cyan, blue, violet, red);
+    background-size: 200% 100%;
+    animation: slide 3s linear infinite;
+    box-shadow: 0 0 8px rgba(255,255,255,.6);
+  }
+  @keyframes slide { to { background-position: -200% 0; } }
+
+  /* ---------- layout "table" ---------- */
+  .layout {
+    display: grid;
+    grid-template-columns: 168px minmax(0, 1fr);
+    gap: 14px;
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 14px 20px;
+    align-items: start;
+  }
+  aside {
+    position: sticky;
+    top: calc(env(safe-area-inset-top, 0px) + 12px);
+    background: #000080;
+    border: 4px ridge var(--silver);
+    padding: 10px 8px;
+    text-align: center;
+    font-size: 13px;
+  }
+  aside h2 {
+    margin: 0 0 8px;
+    font-size: 15px;
+    color: var(--yellow);
+    text-shadow: 2px 2px 0 var(--magenta);
+  }
+  .jump {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3px;
+    margin-bottom: 12px;
+  }
+  .btn {
+    font-family: "MS Sans Serif", Tahoma, Verdana, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #000;
+    background: var(--silver);
+    border: 2px outset #fff;
+    padding: 4px 0;
+    text-decoration: none;
+    cursor: pointer;
+    display: block;
+  }
+  .btn:visited { color: #000; }
+  .btn:active { border-style: inset; }
+  .btn.on { background: var(--yellow); }
+  .btn:focus-visible { outline: 2px dotted var(--magenta); outline-offset: 1px; }
+  .wide { width: 100%; font-size: 12px; padding: 6px 3px; margin-top: 6px; }
+
+  .counter {
+    display: inline-flex;
+    gap: 2px;
+    margin: 6px 0 2px;
+    padding: 3px;
+    background: #000;
+    border: 2px inset var(--silver);
+  }
+  .counter i {
+    font-style: normal;
+    font-family: "Courier New", monospace;
+    font-weight: bold;
+    font-size: 16px;
+    color: var(--lime);
+    background: #111;
+    width: 14px;
+    border-right: 1px solid #333;
+  }
+  .small { font-size: 12px; color: #ddd; line-height: 1.35; }
+  .badge {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 8px;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(#1b3a8a, #000);
+    border: 2px outset #8fa7ff;
+    line-height: 1.2;
+  }
+  .badge b { color: var(--yellow); font-size: 13px; }
+
+  /* ---------- slides ---------- */
+  main { min-width: 0; }
+  .slide { margin: 0 0 30px; scroll-margin-top: 16px; }
+  .titlebar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(90deg, #ff2bd6, #b967ff 55%, #01cdfe);
+    color: #fff;
+    text-shadow: 1px 1px 0 #6b1f7a;
+    font-family: Tahoma, Verdana, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 3px 4px 3px 8px;
+    border: 3px outset var(--silver);
+    border-bottom: 0;
+  }
+  .titlebar .ctl { display: flex; gap: 2px; }
+  .titlebar .ctl span {
+    width: 18px; height: 16px;
+    background: var(--silver);
+    border: 2px outset #fff;
+    color: #000;
+    font-size: 10px;
+    line-height: 11px;
+    text-align: center;
+  }
+  .frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 907 / 510;
+    overflow: hidden;
+    background: #fffef6;
+    border: 6px ridge var(--silver);
+  }
+  .frame iframe {
+    position: absolute; top: 0; left: 0;
+    width: 907px; height: 510px;
+    border: 0;
+    transform: scale(var(--s));
+    transform-origin: 0 0;
+    opacity: 0;
+    transition: opacity .4s;
+  }
+  .frame iframe.ready { opacity: 1; }
+  .caption {
+    text-align: center;
+    font-size: 13px;
+    color: var(--cyan);
+    margin-top: 6px;
+  }
+  .new {
+    display: inline-block;
+    background: red;
+    color: var(--yellow);
+    font-family: "Arial Black", sans-serif;
+    font-size: 11px;
+    padding: 1px 5px;
+    margin-left: 6px;
+    transform: rotate(-8deg);
+  }
+
+  /* ---------- footer ---------- */
+  footer { text-align: center; padding: 10px 14px 40px; }
+  .webring {
+    display: inline-block;
+    border: 4px ridge var(--magenta);
+    background: #000;
+    padding: 10px 16px;
+    font-size: 15px;
+  }
+  .webring a { font-weight: bold; }
+  footer p { margin: 10px 0; }
+
+  /* ---------- guestbook dialog ---------- */
+  dialog {
+    padding: 0;
+    border: 3px outset var(--silver);
+    background: var(--silver);
+    color: #000;
+    font-family: Tahoma, Verdana, sans-serif;
+    max-width: 320px;
+  }
+  dialog::backdrop { background: rgba(0,0,0,.4); }
+  dialog .titlebar { border: 0; }
+  dialog .body { padding: 16px; font-size: 14px; display: flex; gap: 12px; align-items: flex-start; }
+  dialog .body .icon { font-size: 30px; line-height: 1; }
+  dialog form { text-align: center; padding: 0 0 14px; }
+  dialog button { font: inherit; font-size: 13px; padding: 4px 22px; background: var(--silver); border: 2px outset #fff; cursor: pointer; }
+
+  dialog.prize { max-width: 420px; width: 92vw; }
+  dialog.prize .titlebar { background: linear-gradient(90deg, #800000, #f0351f); text-shadow: none; }
+  .prize .body { display: block; text-align: center; padding: 18px 20px 6px; font-size: 17px; line-height: 1.35; }
+  .prize big {
+    display: block;
+    margin-bottom: 8px;
+    font-family: Impact, "Arial Black", sans-serif;
+    font-size: 30px;
+    color: #e3281b;
+  }
+  .prize form { padding: 14px 0 18px; }
+  .prize button { font-weight: bold; font-size: 18px; padding: 6px 28px; }
+  .prize .titlebar form { margin: 0; padding: 0; }
+  .prize .x { background: none; border: 0; color: #fff; font-size: 16px; padding: 0 4px; cursor: pointer; }
+
+  /* sparkle cursor trail */
+  .spark {
+    position: fixed;
+    pointer-events: none;
+    font-size: 14px;
+    z-index: 9999;
+    animation: spark .8s ease-out forwards;
+  }
+  @keyframes spark { to { transform: translateY(24px) scale(.3); opacity: 0; } }
+
+  @media (max-width: 760px) {
+    .layout { grid-template-columns: 1fr; }
+    aside { position: static; }
+    .jump { grid-template-columns: repeat(8, 1fr); }
+    aside .badge, #totop { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ticker span, hr.rainbow, .blink, .floor { animation: none; }
+    .ticker span { padding-left: 12px; }
+    .frame iframe { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="floor" aria-hidden="true"></div>
+<div class="ticker" aria-hidden="true"><span>★ ☆ ★ WELCOME 2 90'S TOWN!!! ★ ☆ ★ a serialized mystery-thriller ★ ☆ ★ no iPhones. no broadband. no problem. ★ ☆ ★ don't forget 2 sign my guestbook!! ★ ☆ ★ this site is best viewed with your eyes ★ ☆ ★ 🌴 🐬 💾 ｅｎｊｏｙ ｙｏｕｒ ｓｔａｙ 🐬 🌴 ★ ☆ ★</span></div>
+
+<header>
+  <div class="title-wrap"><div class="sun" aria-hidden="true"></div><h1 class="wordart">90's TOWN</h1></div>
+  <p class="tagline">~*~ the past isn't dead. it's not even past. ~*~</p>
+  <p class="small">you have entered the official homepage <span class="blink">♥</span> scroll down 2 begin</p>
+  <div class="construction"><b>🚧 THIS SITE IS ALWAYS UNDER CONSTRUCTION 🚧</b></div>
+</header>
+
+<hr class="rainbow">
+
+<div class="layout">
+  <aside>
+    <h2>~ Jump 2 Page ~</h2>
+    <nav class="jump" id="jump" aria-label="Jump to page"></nav>
+
+    <h2>~ Visitors ~</h2>
+    <div class="counter" id="counter" aria-label="Visitor counter"></div>
+    <p class="small">u r visitor number<br>(wow!!)</p>
+
+    <button class="btn wide" id="guestbook">✍️ Sign My Guestbook!</button>
+    <a class="btn wide" href="#top-of-page" id="totop">⬆ Back 2 Top</a>
+
+    <div class="icons" aria-hidden="true">🌴🐬💾🗿</div>
+    <div class="badge">Best viewed in<br><b>Netscape Navigator</b><br>at 800 × 600</div>
+  </aside>
+
+  <main id="pages"></main>
+</div>
+
+<hr class="rainbow">
+
+<footer>
+  <div class="webring">
+    <a href="#" id="ringPrev">&lt;&lt; Prev</a>
+    &nbsp;|&nbsp; 📺 The 90's TV Webring 📺 &nbsp;|&nbsp;
+    <a href="#" id="ringNext">Next &gt;&gt;</a>
+  </div>
+  <p class="small">Last updated: 9/22/1998 &nbsp;•&nbsp; Made with Notepad &amp; love</p>
+  <p class="small">© 1998 90's Town. All rights reserved. Please don't steal my graphics!!</p>
+</footer>
+
+<dialog id="gbDialog">
+  <div class="titlebar"><span>Guestbook.exe</span><span class="ctl"><span>×</span></span></div>
+  <div class="body"><span class="icon" aria-hidden="true">⚠️</span><span>The guestbook is full!<br>Please try again in 1999.</span></div>
+  <form method="dialog"><button>OK</button></form>
+</dialog>
+
+<dialog id="prize" class="prize" aria-labelledby="prizeTitle">
+  <div class="titlebar"><span>!!! ALERT !!!</span><form method="dialog"><button class="x" aria-label="Close">✕</button></form></div>
+  <div class="body">
+    <big id="prizeTitle">CONGRATULATIONS!!!</big>
+    U R THE 1,000,000th VISITOR!!!<br>
+    click OK 2 claim ur prize (the prize is more slides)
+  </div>
+  <form method="dialog"><button autofocus>OK</button></form>
+</dialog>
+
+<script>
+(function () {
+  var TOTAL = 48;
+  var main = document.getElementById('pages');
+  var jump = document.getElementById('jump');
+  var frames = [];
+  var titles = ['welcome.html'];
+
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+
+  for (var i = 0; i < TOTAL; i++) {
+    var n = i + 1;
+    var sec = document.createElement('section');
+    sec.className = 'slide';
+    sec.id = 'page-' + n;
+
+    var bar = document.createElement('div');
+    bar.className = 'titlebar';
+    bar.innerHTML = '<span>' + (titles[i] || 'page_' + pad(n) + '.html') + ' - Netscape</span>' +
+      '<span class="ctl" aria-hidden="true"><span>_</span><span>□</span><span>×</span></span>';
+
+    var frame = document.createElement('div');
+    frame.className = 'frame';
+    var f = document.createElement('iframe');
+    f.setAttribute('scrolling', 'no');
+    f.setAttribute('title', 'Page ' + n);
+    f.dataset.src = 'html/' + (i === 0 ? 'publication.html' : 'publication-' + i + '.html');
+    f.addEventListener('load', onFrameLoad);
+    frame.appendChild(f);
+
+    var cap = document.createElement('div');
+    cap.className = 'caption';
+    cap.innerHTML = '~ Page ' + n + ' of ' + TOTAL + ' ~' + (i === 0 ? '<span class="new blink">NEW!</span>' : '');
+
+    sec.appendChild(bar);
+    sec.appendChild(frame);
+    sec.appendChild(cap);
+    main.appendChild(sec);
+    frames.push(f);
+
+    var a = document.createElement('a');
+    a.className = 'btn';
+    a.href = '#page-' + n;
+    a.textContent = n;
+    jump.appendChild(a);
+  }
+
+  document.body.id = 'top-of-page';
+
+  // scale the fixed 907×510 slides to the column
+  function rescale() {
+    var el = document.querySelector('.frame');
+    var w = el.clientWidth; // inside the ridge border
+    document.documentElement.style.setProperty('--s', w / 907);
+  }
+  rescale();
+  window.addEventListener('resize', rescale);
+
+  function onFrameLoad(e) {
+    var f = e.target;
+    if (!f.getAttribute('src')) return;
+    f.classList.add('ready');
+    if (f.dataset.visible === '1') play(f);
+  }
+  function play(f) {
+    if (f.dataset.played === '1' || !f.classList.contains('ready')) return;
+    f.dataset.played = '1';
+    try { f.contentWindow.postMessage('page:play', '*'); } catch (err) {}
+  }
+
+  var loader = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      var f = en.target.querySelector('iframe');
+      if (!f.getAttribute('src')) f.setAttribute('src', f.dataset.src);
+      loader.unobserve(en.target);
+    });
+  }, { rootMargin: '150% 0px' });
+
+  var buttons = jump.querySelectorAll('.btn');
+  var player = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      var idx = Array.prototype.indexOf.call(main.children, en.target);
+      if (en.isIntersecting) {
+        var f = en.target.querySelector('iframe');
+        f.dataset.visible = '1';
+        play(f);
+        buttons.forEach(function (b) { b.classList.remove('on'); });
+        if (buttons[idx]) buttons[idx].classList.add('on');
+        if (idx === 43) showPrize();
+      }
+    });
+  }, { threshold: 0.5 });
+
+  Array.prototype.forEach.call(main.children, function (s) {
+    loader.observe(s.querySelector('.frame'));
+    player.observe(s);
+  });
+
+  // visitor counter (counts this browser's visits on top of a very authentic base number)
+  var visits = 1;
+  try {
+    visits = parseInt(localStorage.getItem('90stown-visits') || '0', 10) + 1;
+    localStorage.setItem('90stown-visits', String(visits));
+  } catch (err) {}
+  var digits = String(41997 + visits).padStart(6, '0');
+  document.getElementById('counter').innerHTML = digits.split('').map(function (d) { return '<i>' + d + '</i>'; }).join('');
+
+  // millionth-visitor prize, shown once when page 44 comes into view
+  var prize = document.getElementById('prize');
+  var prizeShown = false;
+  function showPrize() {
+    if (prizeShown || !prize.showModal) return;
+    prizeShown = true;
+    prize.showModal();
+  }
+
+  // guestbook
+  var dlg = document.getElementById('gbDialog');
+  document.getElementById('guestbook').addEventListener('click', function () {
+    if (dlg.showModal) dlg.showModal(); else alert('The guestbook is full! Please try again in 1999.');
+  });
+
+  // webring: prev / next page
+  function currentIndex() {
+    var on = jump.querySelector('.on');
+    return on ? Array.prototype.indexOf.call(buttons, on) : 0;
+  }
+  document.getElementById('ringPrev').addEventListener('click', function (e) {
+    e.preventDefault();
+    main.children[Math.max(0, currentIndex() - 1)].scrollIntoView();
+  });
+  document.getElementById('ringNext').addEventListener('click', function (e) {
+    e.preventDefault();
+    main.children[Math.min(TOTAL - 1, currentIndex() + 1)].scrollIntoView();
+  });
+  document.getElementById('totop').addEventListener('click', function (e) {
+    e.preventDefault();
+    window.scrollTo(0, 0);
+  });
+
+  // sparkle cursor trail (skipped for reduced motion and touch screens)
+  var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine = window.matchMedia('(pointer: fine)').matches;
+  if (!calm && fine) {
+    var glyphs = ['✦', '✧', '★', '·'];
+    var colors = ['#fff200', '#ff2bd6', '#3ff3ff', '#ffffff'];
+    var last = 0;
+    document.addEventListener('mousemove', function (e) {
+      var now = Date.now();
+      if (now - last < 40) return;
+      last = now;
+      var s = document.createElement('span');
+      s.className = 'spark';
+      s.textContent = glyphs[Math.floor(Math.random() * glyphs.length)];
+      s.style.color = colors[Math.floor(Math.random() * colors.length)];
+      s.style.left = (e.clientX + 6) + 'px';
+      s.style.top = (e.clientY + 6) + 'px';
+      document.body.appendChild(s);
+      setTimeout(function () { s.remove(); }, 800);
+    });
+  }
+})();
+</script>
+</body>
+</html>
